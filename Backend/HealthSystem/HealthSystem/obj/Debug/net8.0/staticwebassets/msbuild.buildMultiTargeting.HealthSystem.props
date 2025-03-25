@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\HealthSystem.props" />
+</Project>
