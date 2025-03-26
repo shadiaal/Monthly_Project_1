@@ -6,7 +6,7 @@ https://github.com/Razan-Alahmadi/Monthly_Project_1
 git checkout -b AR-feature/Edit-Readme-File
 ## save it
 git add .
-git commit -m "As in code standard"
+git commit -m "[numberOfPush] nameOfFeature - Short Description"
 
 ## push your feature
 git push origin feature/<feature-name>

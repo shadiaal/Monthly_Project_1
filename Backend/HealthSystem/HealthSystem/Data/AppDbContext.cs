@@ -24,22 +24,22 @@ namespace HealthSystem.Data
             //define PK keys for entities
             modelBuilder.Entity<Doctor>()
                 .HasNoKey();
-            //modelBuilder.Entity<Doctor>()
-            //    .HasKey(d => d.UserID);
-            //modelBuilder.Entity<Patient>()
-            //    .HasKey(d => d.UserID);
+            modelBuilder.Entity<Doctor>()
+                .HasKey(d => d.UserID);
+            modelBuilder.Entity<Patient>()
+                .HasKey(d => d.UserID);
 
             // One-to-One: User -> Patient
             modelBuilder.Entity<Patient>()
                 .HasOne(p => p.User)
-                .WithOne()
+                .WithOne(u => u.Patient) // Specify the navigation property in User
                 .HasForeignKey<Patient>(p => p.UserID)
                 .OnDelete(DeleteBehavior.Cascade); // Deleting a User will delete the associated Patient
 
             // One-to-One: User -> Doctor
             modelBuilder.Entity<Doctor>()
                 .HasOne(d => d.User)
-                .WithOne()
+                .WithOne(u => u.Doctor) // Specify the navigation property in User
                 .HasForeignKey<Doctor>(d => d.UserID)
                 .OnDelete(DeleteBehavior.Cascade); // Deleting a User will delete the associated Doctor
 
@@ -65,6 +65,8 @@ namespace HealthSystem.Data
                 .OnDelete(DeleteBehavior.Cascade); // Deleting a Doctor will delete their WorkingHours
 
             base.OnModelCreating(modelBuilder);
+
+            DataSeeding.Seed(modelBuilder);
         }
     }
 }

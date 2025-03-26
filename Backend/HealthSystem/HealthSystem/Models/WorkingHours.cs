@@ -12,14 +12,14 @@ namespace HealthSystem.Models
 		public Guid UserID { get; set; }
 
 		[Required(ErrorMessage = "Day is required.")]
-		[EnumDataType(typeof(DayOfWeek), ErrorMessage = "Invalid day.")]
-		public DayOfWeek Day { get; set; }
+		[EnumDataType(typeof(dayOfWeek), ErrorMessage = "Invalid day.")]
+		public dayOfWeek Day { get; set; }
 		public TimeSpan StartTime { get; set; }
 		public TimeSpan EndTime { get; set; }
 
 		public Doctor Doctor { get; set; }
 	}
-	public enum DayOfWeek
+	public enum dayOfWeek
 	{
 		Sunday,
 		Monday,
