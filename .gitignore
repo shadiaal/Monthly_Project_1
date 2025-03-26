@@ -23,3 +23,6 @@ Thumbs.db         # Windows
 
 # Ignore sensitive files like .env
 .env
+
+# Ignore Visual Studio-specific files
+.vs/
