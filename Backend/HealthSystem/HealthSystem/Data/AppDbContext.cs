@@ -23,9 +23,11 @@ namespace HealthSystem.Data
 
             //define PK keys for entities
             modelBuilder.Entity<Doctor>()
-                .HasKey(d => d.UserID);
-            modelBuilder.Entity<Patient>()
-                .HasKey(d => d.UserID);
+                .HasNoKey();
+            //modelBuilder.Entity<Doctor>()
+            //    .HasKey(d => d.UserID);
+            //modelBuilder.Entity<Patient>()
+            //    .HasKey(d => d.UserID);
 
             // One-to-One: User -> Patient
             modelBuilder.Entity<Patient>()

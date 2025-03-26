@@ -1,0 +1,25 @@
+# Ignore build results
+/bin/
+/obj/
+
+# User-specific files
+*.user
+*.suo
+
+# Ignore dependency directories
+/node_modules/
+/packages/
+
+# Ignore configuration files (IDE settings)
+.vscode/
+.idea/
+
+# Log files
+*.log
+
+# Ignore temporary files created by OS
+.DS_Store         # macOS
+Thumbs.db         # Windows
+
+# Ignore sensitive files like .env
+.env
