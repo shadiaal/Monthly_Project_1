@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "CreateDoctor",
+    "RelativePath": "api/admin/create-doctor",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthSystem.Controllers.CreateDoctorRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
