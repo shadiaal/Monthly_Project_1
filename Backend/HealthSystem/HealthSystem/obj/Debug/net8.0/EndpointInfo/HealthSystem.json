@@ -35,39 +35,144 @@
           }
         }
       }
+    },
+    "/api/admin/doctors": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/appointments/create": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/download-excel/{doctorId}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "doctorId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/getAllAvailablAappointments": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "clinic",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ClinicType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
     }
   },
   "components": {
     "schemas": {
-      "CreateDoctorRequest": {
+      "ClinicType": {
+        "enum": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9
+        ],
+        "type": "integer",
+        "format": "int32"
+      },
+      "CreateAppointmentRequest": {
         "type": "object",
         "properties": {
-          "user": {
-            "$ref": "#/components/schemas/UserDto"
-          },
-          "gender": {
+          "patientID": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
-          "specialization": {
+          "doctorID": {
             "type": "string",
-            "nullable": true
+            "format": "uuid"
           },
-          "clinic": {
+          "appointmentDate": {
             "type": "string",
-            "nullable": true
+            "format": "date-time"
           },
-          "workingHours": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/WorkingHoursDto"
-            },
+          "appointmentTime": {
+            "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "UserDto": {
+      "CreateDoctorRequest": {
         "type": "object",
         "properties": {
           "firstName": {
@@ -94,14 +199,29 @@
             "type": "string",
             "nullable": true
           },
-          "role": {
+          "gender": {
             "type": "string",
+            "nullable": true
+          },
+          "specialization": {
+            "type": "string",
+            "nullable": true
+          },
+          "clinic": {
+            "type": "string",
+            "nullable": true
+          },
+          "workingHours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkingHoursRequest"
+            },
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-      "WorkingHoursDto": {
+      "WorkingHoursRequest": {
         "type": "object",
         "properties": {
           "day": {
