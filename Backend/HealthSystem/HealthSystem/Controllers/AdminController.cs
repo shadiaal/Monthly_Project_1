@@ -5,6 +5,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Org.BouncyCastle.Crypto.Generators;
 using BCrypt.Net;
+using OfficeOpenXml;
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthSystem.Controllers
 {
@@ -94,7 +101,7 @@ namespace HealthSystem.Controllers
                     int month = int.Parse(dateParts[1]);
                     int day = int.Parse(dateParts[2]);
 
-                    dateOfBirth = new DateTime(year, month, day); 
+                    dateOfBirth = new DateTime(year, month, day);
                 }
                 catch
                 {
@@ -111,7 +118,7 @@ namespace HealthSystem.Controllers
                     Email = request.user.email,
                     PhoneNumber = request.user.phoneNumber,
                     Password = BCrypt.Net.BCrypt.HashPassword(request.user.password),
-                Role = UserRole.Patient
+                    Role = UserRole.Patient
                 };
 
                 // Create the Patient
@@ -148,6 +155,10 @@ namespace HealthSystem.Controllers
 
         // ------- Admin & Doctor -------
 
+
+
+
+        // ****  Create new Doctor API  *****
         [HttpPost("create-doctor")]
         public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorRequest request)
         {
@@ -160,27 +171,28 @@ namespace HealthSystem.Controllers
             var user = new User
             {
                 UserID = Guid.NewGuid(),
-                FirstName = request.User.FirstName,
-                MiddleName = request.User.MiddleName,
-                LastName = request.User.LastName,
-                Email = request.User.Email,
-                PhoneNumber = request.User.PhoneNumber,
-                Password = HashPassword(request.User.Password), // Hash the password securely
-                Role = UserRole.Doctor // Ensure role is Doctor
+                FirstName = request.FirstName,
+                MiddleName = request.MiddleName,
+                LastName = request.LastName,
+                Email = request.Email,
+                PhoneNumber = request.PhoneNumber,
+                Password = request.Password,
+                Role = UserRole.Doctor
             };
 
             // Add the user to the database
             await _context.Users.AddAsync(user);
-            await _context.SaveChangesAsync();  // Save the user to get the UserID
+            await _context.SaveChangesAsync();
 
             // Step 2: Create a new Doctor
             var doctor = new Doctor
             {
                 UserID = user.UserID,
-                Gender = Enum.TryParse(request.Gender, out Gender gender) ? gender : Gender.Male, // Default to Male if invalid
+                Gender = Enum.TryParse(request.Gender, out Gender gender) ? gender : Gender.Male, // Default is Male
                 Specialization = request.Specialization,
-                Clinic = Enum.TryParse(request.Clinic, out ClinicType clinic) ? clinic : ClinicType.General, // Default to General if invalid
-                User = user
+                Clinic = Enum.TryParse(request.Clinic, out ClinicType clinic) ? clinic : ClinicType.General, // Default is General
+                User = user,
+                WorkingHours = new List<WorkingHours>() // Initialize WorkingHours list
             };
 
             // Add working hours for the doctor
@@ -199,19 +211,268 @@ namespace HealthSystem.Controllers
 
             // Step 3: Save the doctor to the database
             await _context.Doctors.AddAsync(doctor);
-            await _context.SaveChangesAsync();  // Save the doctor and working hours
+            await _context.SaveChangesAsync();
 
             // Step 4: Return success message
             return Ok(new { message = "Doctor created successfully" });
+        }
+
+
+
+
+
+
+        // ****  Get All Doctors API  *****
+        [HttpGet("doctors")]
+        public async Task<IActionResult> GetDoctors()
+        {
+            var doctors = await _context.Doctors
+                .Include(d => d.User)  // Include User details (eager)
+                .Include(d => d.WorkingHours)  // Include Working Hours details
+                .ToListAsync();
+
+            var doctorDtos = new List<object>();
+
+            foreach (var doctor in doctors)
+            {
+                var doctorDto = new
+                {
+                    user = new
+                    {
+                        id = doctor.User.UserID,
+                        uuid = doctor.User.UserID.ToString(),
+                        firstName = doctor.User.FirstName,
+                        middleName = doctor.User.MiddleName,
+                        lastName = doctor.User.LastName,
+                        email = doctor.User.Email,
+                        phoneNumber = doctor.User.PhoneNumber,
+                        role = doctor.User.Role
+                    },
+                    gender = doctor.Gender,
+                    specialization = doctor.Specialization,
+                    clinic = doctor.Clinic,
+                    workingHours = new List<object>()
+                };
+
+                // Loop through the working hours 
+                foreach (var workingHour in doctor.WorkingHours)
+                {
+                    var workingHourDto = new
+                    {
+                        day = workingHour.Day.ToString().ToUpper(),
+                        startTime = workingHour.StartTime.ToString(@"hh\:mm"),
+                        endTime = workingHour.EndTime.ToString(@"hh\:mm")
+                    };
+                    (doctorDto.workingHours as List<object>).Add(workingHourDto);
                 }
 
-                //method to hash the password using a hash algorithm
-                private string HashPassword(string password)
+                doctorDtos.Add(doctorDto);
+            }
+
+            return Ok(doctorDtos);
+        }
+
+
+
+
+
+
+        // ****  Create new Appointment API  *****
+        [HttpPost("appointments/create")]
+        public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentRequest request)
+        {
+            // Validate input
+            if (request == null || !ModelState.IsValid)
+            {
+                return BadRequest("Invalid appointment data.");
+            }
+
+            // Step 1: Check if patient and doctor exist
+            var patient = await _context.Patients.FindAsync(request.PatientID);
+            var doctor = await _context.Doctors.Include(d => d.WorkingHours)
+                                               .FirstOrDefaultAsync(d => d.UserID == request.DoctorID);
+
+            if (patient == null || doctor == null)
+            {
+                return NotFound("Patient or Doctor not found.");
+            }
+
+            // Step 2: Check if the appointment time is within the doctor's working hours
+            var appointmentTime = TimeSpan.Parse(request.AppointmentTime);
+            //var appointmentDay = Enum.TryParse(request.AppointmentDate.ToString("dddd").ToUpper(), out dayOfWeek day) ? day : dayOfWeek.Monday;
+
+            //var workingHours = doctor.WorkingHours.FirstOrDefault(w => w.Day == appointmentDay);
+
+            //if (workingHours == null || appointmentTime < workingHours.StartTime || appointmentTime > workingHours.EndTime)
+            //{
+            //    return BadRequest("The doctor is not available at the selected time.");
+            //}
+
+            // Step 3: Create the new appointment
+            var appointment = new Appointment
+            {
+                PatientUserID = patient.UserID,
+                DoctorUserID = doctor.UserID,
+                AppointmentDate = request.AppointmentDate,
+                AppointmentTime = appointmentTime,
+                Status = AppointmentStatus.Upcoming, // Default "Upcoming"
+                Note = ""// empty note by default
+            };
+
+            // Save the appointment to the database
+            await _context.Appointments.AddAsync(appointment);
+            await _context.SaveChangesAsync();
+
+            // Return success message
+            return Ok(new { message = "Appointment created successfully" });
+        }
+
+
+
+
+        // ****  Get download Excel file contain doctor information API  *****
+        // GET: /api/admin/download-excel/{doctorId}
+        [HttpGet("download-excel/{doctorId}")]
+        public async Task<IActionResult> DownloadDoctorExcel(Guid doctorId)
+        {
+            // Retrieve the specific doctor by ID
+            var doctor = await _context.Doctors
+                .Include(d => d.User)  // Include user details like name, email, etc.
+                .FirstOrDefaultAsync(d => d.UserID == doctorId);
+
+            if (doctor == null)
+            {
+                return NotFound("Doctor not found.");
+            }
+            //Set license context
+            OfficeOpenXml.ExcelPackage.LicenseContext = OfficeOpenXml.LicenseContext.NonCommercial;
+            // Create a new Excel package
+            using (var package = new ExcelPackage())
+            {
+                // Add a worksheet to the package
+                var worksheet = package.Workbook.Worksheets.Add("Doctor Info");
+
+                // Add headers to the Excel sheet
+                worksheet.Cells[1, 1].Value = "Doctor ID";
+                worksheet.Cells[1, 2].Value = "First Name";
+                worksheet.Cells[1, 3].Value = "Middle Name";
+                worksheet.Cells[1, 4].Value = "Last Name";
+                worksheet.Cells[1, 5].Value = "Email";
+                worksheet.Cells[1, 6].Value = "Phone Number";
+                worksheet.Cells[1, 7].Value = "Gender";
+                worksheet.Cells[1, 8].Value = "Specialization";
+                worksheet.Cells[1, 9].Value = "Clinic";
+
+                // Populate the worksheet with data for the single doctor
+                worksheet.Cells[2, 1].Value = doctor.User.UserID;
+                worksheet.Cells[2, 2].Value = doctor.User.FirstName;
+                worksheet.Cells[2, 3].Value = doctor.User.MiddleName;
+                worksheet.Cells[2, 4].Value = doctor.User.LastName;
+                worksheet.Cells[2, 5].Value = doctor.User.Email;
+                worksheet.Cells[2, 6].Value = doctor.User.PhoneNumber;
+                worksheet.Cells[2, 7].Value = doctor.Gender.ToString();
+                worksheet.Cells[2, 8].Value = doctor.Specialization;
+                worksheet.Cells[2, 9].Value = doctor.Clinic.ToString();
+
+                // Convert the package to a byte array
+                var fileBytes = package.GetAsByteArray();
+
+                // Return the Excel file as a download
+                return File(fileBytes, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", $"{doctor.User.FirstName}_{doctor.User.LastName}_DoctorInfo.xlsx");
+            }
+        }
+
+        // ****  Get Availabel appointments API  *****
+        [HttpGet("getAllAvailablAappointments")]
+        public async Task<IActionResult> GetAvailableAppointments(DateTime date, ClinicType clinic)
+        {
+            // Get the day of the week for the selected date
+            var dayOfWeek = date.DayOfWeek;
+
+            // Get all doctors who belong to the selected clinic
+            var doctorsInClinic = await _context.Doctors
+                .Where(d => d.Clinic == clinic)
+                .Include(d => d.WorkingHours)
+                .Include(d => d.User)
+                .ToListAsync();
+
+            Console.WriteLine($"Doctors in Clinic ({doctorsInClinic.Count}):");
+            // This will hold all the available time slots for all doctors
+            var availableAppointments = new List<object>();
+
+            foreach (var doctor in doctorsInClinic)
+            {
+                // Get the working hours for the selected day of the week
+                var workingHours = doctor.WorkingHours
+                    .Where(wh => (DayOfWeek)wh.Day == dayOfWeek)
+                    .ToList();
+
+                foreach (var hours in workingHours)
                 {
-                    
-                    return password; 
+                    // Get any booked appointments for this doctor on the selected date
+                    var bookedAppointments = await _context.Appointments
+                        .Where(a => a.DoctorUserID == doctor.UserID
+                                 && a.AppointmentDate.Date == date.Date
+                                 && a.Status == AppointmentStatus.Upcoming)
+                        .ToListAsync();
+
+                    // Generate available time slots within the working hours
+                    var availableTimeSlots = GetAvailableTimeSlots(hours, bookedAppointments);
+
+                    // Only add to the result if there are available time slots
+                    if (availableTimeSlots != null)
+                    {
+                        availableAppointments.Add(new
+                        {
+                            DoctorName = $"{doctor.User.FirstName} {doctor.User.LastName}",
+                            Specialization = doctor.Specialization,
+                            Clinic = doctor.Clinic,
+                            AvailableTimeSlots = availableTimeSlots
+                        });
+                    }
+                    else
+                    {
+                        Console.WriteLine("no availableTimeSlots:");
+                        // For example, log the issue or skip the doctor
+                    }
+
                 }
             }
+
+            // Return available appointments as JSON
+            return Ok(new { availableAppointments });
+        }
+
+        private List<TimeSpan> GetAvailableTimeSlots(WorkingHours workingHours, List<Appointment> bookedAppointments)
+        {
+            // Generate time slots between the working hours (30-minute intervals)
+            List<TimeSpan> availableTimeSlots = new List<TimeSpan>();
+
+            for (var time = workingHours.StartTime; time < workingHours.EndTime; time = time.Add(TimeSpan.FromMinutes(30)))
+            {
+                // Check if the time slot is already booked
+                var isBooked = bookedAppointments
+                    .Any(a => a.AppointmentTime == time);
+
+                // If the slot is not booked, add it as an available time slot
+                if (!isBooked)
+                {
+                    availableTimeSlots.Add(time);
+                }
+            }
+
+            return availableTimeSlots;
+        }
+
+
+        //End of endpoints
+    }
+
+
+
+
+
+
 
 
 
@@ -220,54 +481,54 @@ namespace HealthSystem.Controllers
 
     // Request model for patient creation
     public class PatientCreateRequest
-    {
-        public UserRequest user { get; set; }
-        public string nationalID { get; set; }
-        public string dateOfBirth { get; set; }
-        public string gender { get; set; }
-        public string bloodType { get; set; }
-        public string allergies { get; set; }
-        public string chronicDiseases { get; set; }
-    }
+{
+    public UserRequest user { get; set; }
+    public string nationalID { get; set; }
+    public string dateOfBirth { get; set; }
+    public string gender { get; set; }
+    public string bloodType { get; set; }
+    public string allergies { get; set; }
+    public string chronicDiseases { get; set; }
+}
 
-    public class UserRequest
-    {
-        public string firstName { get; set; }
-        public string middleName { get; set; }
-        public string lastName { get; set; }
-        public string email { get; set; }
-        public string phoneNumber { get; set; }
-        public string password { get; set; }
-    }
+public class UserRequest
+{
+    public string firstName { get; set; }
+    public string middleName { get; set; }
+    public string lastName { get; set; }
+    public string email { get; set; }
+    public string phoneNumber { get; set; }
+    public string password { get; set; }
+}
+// Define the CreateDoctorRequest class to match input structure for creating new doctor
+public class CreateDoctorRequest
+{
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public string Password { get; set; }
+    public string Gender { get; set; }
+    public string Specialization { get; set; }
+    public string Clinic { get; set; }
+    public List<WorkingHoursRequest> WorkingHours { get; set; }
+}
 
+// Define the WorkingHoursRequest class for working hours input 
+public class WorkingHoursRequest
+{
+    public string Day { get; set; }
+    public string StartTime { get; set; }
+    public string EndTime { get; set; }
+}
 
-    // DTO for creating a doctor
-    public class CreateDoctorRequest
-            {
-                public UserDto User { get; set; }
-                public string Gender { get; set; }
-                public string Specialization { get; set; }
-                public string Clinic { get; set; }
-                public List<WorkingHoursDto> WorkingHours { get; set; }
-            }
-
-            public class UserDto
-            {
-                public string FirstName { get; set; }
-                public string MiddleName { get; set; }
-                public string LastName { get; set; }
-                public string Email { get; set; }
-                public string PhoneNumber { get; set; }
-                public string Password { get; set; }
-                public string Role { get; set; }
-            }
-
-            public class WorkingHoursDto
-            {
-                public string Day { get; set; }
-                public string StartTime { get; set; }
-                public string EndTime { get; set; }
-            }
-
-
+// Define the CreateAppointmentRequest class to match input structure for creating new appointment
+public class CreateAppointmentRequest
+{
+    public Guid PatientID { get; set; }
+    public Guid DoctorID { get; set; }
+    public DateTime AppointmentDate { get; set; }
+    public string AppointmentTime { get; set; }
+}
 }

@@ -1,6 +1,22 @@
 [
   {
     "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "CreateAppointment",
+    "RelativePath": "api/admin/appointments/create",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthSystem.Controllers.CreateAppointmentRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
     "Method": "CreateDoctor",
     "RelativePath": "api/admin/create-doctor",
     "HttpMethod": "POST",
@@ -27,6 +43,53 @@
         "Name": "request",
         "Type": "HealthSystem.Controllers.PatientCreateRequest",
         "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "GetDoctors",
+    "RelativePath": "api/admin/doctors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "DownloadDoctorExcel",
+    "RelativePath": "api/admin/download-excel/{doctorId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "doctorId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "GetAvailableAppointments",
+    "RelativePath": "api/admin/getAllAvailablAappointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "clinic",
+        "Type": "System.String",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": []
