@@ -33,6 +33,22 @@
   },
   {
     "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "CreatePatient",
+    "RelativePath": "api/admin/create-patient",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "HealthSystem.Controllers.PatientCreateRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
     "Method": "GetDoctors",
     "RelativePath": "api/admin/doctors",
     "HttpMethod": "GET",
@@ -76,6 +92,26 @@
         "IsRequired": false
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "Barchart",
+    "RelativePath": "api/admin/graph/barChart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "Piechart",
+    "RelativePath": "api/admin/graph/piechart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

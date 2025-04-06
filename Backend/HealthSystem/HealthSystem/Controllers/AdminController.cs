@@ -3,6 +3,8 @@ using HealthSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
+using BCrypt.Net;
 using OfficeOpenXml;
 
 using System;
@@ -23,8 +25,135 @@ namespace HealthSystem.Controllers
         {
             _context = context;
         }
+        // ------- Admin & statistics -------
+
+        [HttpGet("graph/barChart")]
+        public async Task<IActionResult> Barchart()
+        {
+            var patientsCount = await _context.Patients.CountAsync();
+            var doctorsCount = await _context.Doctors.CountAsync();
+
+            var BarchartData = new
+            {
+                patients = patientsCount,
+                doctors = doctorsCount
+            };
+
+            return Ok(BarchartData);
+        }
 
 
+        [HttpGet("graph/piechart")]
+        public async Task<IActionResult> Piechart()
+        {
+            var maleCount = await _context.Patients.CountAsync(p => p.Gender == Gender.Male);
+            var femaleCount = await _context.Patients.CountAsync(p => p.Gender == Gender.Female);
+
+            var PiechartData = new[]
+            {
+            new { name = "Male", value = maleCount },
+            new { name = "Female", value = femaleCount },
+        };
+
+            return Ok(PiechartData);
+
+        }
+
+
+        // ------- Admin & Patient -------
+
+        [HttpPost("create-patient")]
+        public async Task<IActionResult> CreatePatient([FromBody] PatientCreateRequest request)
+        {
+            try
+            {
+                // Validate the request
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+
+                // Check if email already exists
+                if (await _context.Users.AnyAsync(u => u.Email == request.user.email))
+                {
+                    return BadRequest("Email already exists.");
+                }
+
+                // Check if national ID already exists
+                if (await _context.Patients.AnyAsync(p => p.NationalID == request.nationalID))
+                {
+                    return BadRequest("National ID already exists.");
+                }
+
+
+                // Parse date string into year, month, day components
+                DateTime dateOfBirth;
+                try
+                {
+                    var dateParts = request.dateOfBirth.Split('-');
+                    if (dateParts.Length != 3)
+                    {
+                        return BadRequest("Invalid date format. Use YYYY-MM-DD.");
+                    }
+
+                    int year = int.Parse(dateParts[0]);
+                    int month = int.Parse(dateParts[1]);
+                    int day = int.Parse(dateParts[2]);
+
+                    dateOfBirth = new DateTime(year, month, day);
+                }
+                catch
+                {
+                    return BadRequest("Invalid date format. Use YYYY-MM-DD.");
+                }
+
+                // Create the User
+                var user = new User
+                {
+                    UserID = Guid.NewGuid(),
+                    FirstName = request.user.firstName,
+                    MiddleName = request.user.middleName,
+                    LastName = request.user.lastName,
+                    Email = request.user.email,
+                    PhoneNumber = request.user.phoneNumber,
+                    Password = BCrypt.Net.BCrypt.HashPassword(request.user.password),
+                    Role = UserRole.Patient
+                };
+
+                // Create the Patient
+                var patient = new Patient
+                {
+                    UserID = user.UserID,
+                    NationalID = request.nationalID,
+                    DateOfBirth = dateOfBirth,
+                    Gender = Enum.Parse<Gender>(request.gender),
+                    BloodType = Enum.Parse<BloodType>(request.bloodType.Replace("+", "_Positive").Replace("-", "_Negative")),
+                    Allergies = request.allergies,
+                    ChronicDiseases = request.chronicDiseases
+                };
+
+                // Add to database
+                _context.Users.Add(user);
+                _context.Patients.Add(patient);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "Patient created successfully",
+                    userId = user.UserID
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+        // ------- Admin & Doctor -------
 
 
 
@@ -259,14 +388,14 @@ namespace HealthSystem.Controllers
         {
             // Get the day of the week for the selected date
             var dayOfWeek = date.DayOfWeek;
-          
+
             // Get all doctors who belong to the selected clinic
             var doctorsInClinic = await _context.Doctors
                 .Where(d => d.Clinic == clinic)
                 .Include(d => d.WorkingHours)
                 .Include(d => d.User)
                 .ToListAsync();
-           
+
             Console.WriteLine($"Doctors in Clinic ({doctorsInClinic.Count}):");
             // This will hold all the available time slots for all doctors
             var availableAppointments = new List<object>();
@@ -295,7 +424,7 @@ namespace HealthSystem.Controllers
                     {
                         availableAppointments.Add(new
                         {
-                           DoctorName = $"{doctor.User.FirstName} {doctor.User.LastName}",
+                            DoctorName = $"{doctor.User.FirstName} {doctor.User.LastName}",
                             Specialization = doctor.Specialization,
                             Clinic = doctor.Clinic,
                             AvailableTimeSlots = availableTimeSlots
@@ -342,35 +471,64 @@ namespace HealthSystem.Controllers
 
 
 
-    // Define the CreateDoctorRequest class to match input structure for creating new doctor
-    public class CreateDoctorRequest
-    {
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string Password { get; set; }
-        public string Gender { get; set; }
-        public string Specialization { get; set; }
-        public string Clinic { get; set; }
-        public List<WorkingHoursRequest> WorkingHours { get; set; }
-    }
 
-    // Define the WorkingHoursRequest class for working hours input 
-    public class WorkingHoursRequest
-    {
-        public string Day { get; set; }
-        public string StartTime { get; set; }
-        public string EndTime { get; set; }
-    }
 
-    // Define the CreateAppointmentRequest class to match input structure for creating new appointment
-    public class CreateAppointmentRequest
-    {
-        public Guid PatientID { get; set; }
-        public Guid DoctorID { get; set; }
-        public DateTime AppointmentDate { get; set; }
-        public string AppointmentTime { get; set; } 
-    }
+
+
+
+
+    // ------- DTO -------
+
+    // Request model for patient creation
+    public class PatientCreateRequest
+{
+    public UserRequest user { get; set; }
+    public string nationalID { get; set; }
+    public string dateOfBirth { get; set; }
+    public string gender { get; set; }
+    public string bloodType { get; set; }
+    public string allergies { get; set; }
+    public string chronicDiseases { get; set; }
+}
+
+public class UserRequest
+{
+    public string firstName { get; set; }
+    public string middleName { get; set; }
+    public string lastName { get; set; }
+    public string email { get; set; }
+    public string phoneNumber { get; set; }
+    public string password { get; set; }
+}
+// Define the CreateDoctorRequest class to match input structure for creating new doctor
+public class CreateDoctorRequest
+{
+    public string FirstName { get; set; }
+    public string MiddleName { get; set; }
+    public string LastName { get; set; }
+    public string Email { get; set; }
+    public string PhoneNumber { get; set; }
+    public string Password { get; set; }
+    public string Gender { get; set; }
+    public string Specialization { get; set; }
+    public string Clinic { get; set; }
+    public List<WorkingHoursRequest> WorkingHours { get; set; }
+}
+
+// Define the WorkingHoursRequest class for working hours input 
+public class WorkingHoursRequest
+{
+    public string Day { get; set; }
+    public string StartTime { get; set; }
+    public string EndTime { get; set; }
+}
+
+// Define the CreateAppointmentRequest class to match input structure for creating new appointment
+public class CreateAppointmentRequest
+{
+    public Guid PatientID { get; set; }
+    public Guid DoctorID { get; set; }
+    public DateTime AppointmentDate { get; set; }
+    public string AppointmentTime { get; set; }
+}
 }

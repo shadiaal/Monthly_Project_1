@@ -1,0 +1,12 @@
+<!-- admin.component.html -->
+<div class="layout">
+    <aside class="sidebar">
+        <!-- استخدام routerLink بدلاً من (click) -->
+        <a [routerLink]="['/admin/dashboard']">Dashboard</a>
+        <a [routerLink]="['/admin/createPatient']">إنشاء مريض</a>
+    </aside>
+
+    <main class="main-content">
+        <router-outlet></router-outlet> <!-- مكان عرض المكونات الفرعية -->
+    </main>
+</div>

@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "QS7QarGPcuE=",
+  "dgSpecHash": "0lCSUxY68xU=",
   "success": true,
   "projectFilePath": "C:\\Users\\areej\\Documents\\ElmBootcamp\\MonthlyProject1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\areej\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\areej\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\areej\\.nuget\\packages\\epplus\\7.7.0\\epplus.7.7.0.nupkg.sha512",
     "C:\\Users\\areej\\.nuget\\packages\\epplus.interfaces\\7.7.0\\epplus.interfaces.7.7.0.nupkg.sha512",
