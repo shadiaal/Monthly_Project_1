@@ -3,6 +3,8 @@ using HealthSystem.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Org.BouncyCastle.Crypto.Generators;
+using BCrypt.Net;
 
 namespace HealthSystem.Controllers
 {
@@ -16,6 +18,135 @@ namespace HealthSystem.Controllers
         {
             _context = context;
         }
+        // ------- Admin & statistics -------
+
+        [HttpGet("graph/barChart")]
+        public async Task<IActionResult> Barchart()
+        {
+            var patientsCount = await _context.Patients.CountAsync();
+            var doctorsCount = await _context.Doctors.CountAsync();
+
+            var BarchartData = new
+            {
+                patients = patientsCount,
+                doctors = doctorsCount
+            };
+
+            return Ok(BarchartData);
+        }
+
+
+        [HttpGet("graph/piechart")]
+        public async Task<IActionResult> Piechart()
+        {
+            var maleCount = await _context.Patients.CountAsync(p => p.Gender == Gender.Male);
+            var femaleCount = await _context.Patients.CountAsync(p => p.Gender == Gender.Female);
+
+            var PiechartData = new[]
+            {
+            new { name = "Male", value = maleCount },
+            new { name = "Female", value = femaleCount },
+        };
+
+            return Ok(PiechartData);
+
+        }
+
+
+        // ------- Admin & Patient -------
+
+        [HttpPost("create-patient")]
+        public async Task<IActionResult> CreatePatient([FromBody] PatientCreateRequest request)
+        {
+            try
+            {
+                // Validate the request
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+
+                // Check if email already exists
+                if (await _context.Users.AnyAsync(u => u.Email == request.user.email))
+                {
+                    return BadRequest("Email already exists.");
+                }
+
+                // Check if national ID already exists
+                if (await _context.Patients.AnyAsync(p => p.NationalID == request.nationalID))
+                {
+                    return BadRequest("National ID already exists.");
+                }
+
+
+                // Parse date string into year, month, day components
+                DateTime dateOfBirth;
+                try
+                {
+                    var dateParts = request.dateOfBirth.Split('-');
+                    if (dateParts.Length != 3)
+                    {
+                        return BadRequest("Invalid date format. Use YYYY-MM-DD.");
+                    }
+
+                    int year = int.Parse(dateParts[0]);
+                    int month = int.Parse(dateParts[1]);
+                    int day = int.Parse(dateParts[2]);
+
+                    dateOfBirth = new DateTime(year, month, day); 
+                }
+                catch
+                {
+                    return BadRequest("Invalid date format. Use YYYY-MM-DD.");
+                }
+
+                // Create the User
+                var user = new User
+                {
+                    UserID = Guid.NewGuid(),
+                    FirstName = request.user.firstName,
+                    MiddleName = request.user.middleName,
+                    LastName = request.user.lastName,
+                    Email = request.user.email,
+                    PhoneNumber = request.user.phoneNumber,
+                    Password = BCrypt.Net.BCrypt.HashPassword(request.user.password),
+                Role = UserRole.Patient
+                };
+
+                // Create the Patient
+                var patient = new Patient
+                {
+                    UserID = user.UserID,
+                    NationalID = request.nationalID,
+                    DateOfBirth = dateOfBirth,
+                    Gender = Enum.Parse<Gender>(request.gender),
+                    BloodType = Enum.Parse<BloodType>(request.bloodType.Replace("+", "_Positive").Replace("-", "_Negative")),
+                    Allergies = request.allergies,
+                    ChronicDiseases = request.chronicDiseases
+                };
+
+                // Add to database
+                _context.Users.Add(user);
+                _context.Patients.Add(patient);
+
+                await _context.SaveChangesAsync();
+
+                return Ok(new
+                {
+                    message = "Patient created successfully",
+                    userId = user.UserID
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+
+
+        // ------- Admin & Doctor -------
 
         [HttpPost("create-doctor")]
         public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorRequest request)
@@ -82,8 +213,36 @@ namespace HealthSystem.Controllers
                 }
             }
 
-            // DTO for creating a doctor
-            public class CreateDoctorRequest
+
+
+
+    // ------- DTO -------
+
+    // Request model for patient creation
+    public class PatientCreateRequest
+    {
+        public UserRequest user { get; set; }
+        public string nationalID { get; set; }
+        public string dateOfBirth { get; set; }
+        public string gender { get; set; }
+        public string bloodType { get; set; }
+        public string allergies { get; set; }
+        public string chronicDiseases { get; set; }
+    }
+
+    public class UserRequest
+    {
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+        public string email { get; set; }
+        public string phoneNumber { get; set; }
+        public string password { get; set; }
+    }
+
+
+    // DTO for creating a doctor
+    public class CreateDoctorRequest
             {
                 public UserDto User { get; set; }
                 public string Gender { get; set; }

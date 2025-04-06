@@ -1,0 +1,187 @@
+<div class="container mt-4">
+    <h2>Create New Patient</h2>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{ successMessage }}
+    </div>
+
+    <form [formGroup]="patientForm" (ngSubmit)="onSubmit()">
+        <!-- User Information -->
+        <fieldset class="mb-4">
+            <legend>Personal Information</legend>
+
+            <div formGroupName="user">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="firstName">First Name*</label>
+                            <input type="text" class="form-control" id="firstName" formControlName="firstName"
+                                [ngClass]="{'is-invalid': patientForm.get('user.firstName')?.invalid && patientForm.get('user.firstName')?.touched}">
+                            <div *ngIf="patientForm.get('user.firstName')?.invalid && patientForm.get('user.firstName')?.touched"
+                                class="invalid-feedback">
+                                First name is required and must be at least 2 characters.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="middleName">Middle Name</label>
+                            <input type="text" class="form-control" id="middleName" formControlName="middleName">
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="lastName">Last Name*</label>
+                            <input type="text" class="form-control" id="lastName" formControlName="lastName"
+                                [ngClass]="{'is-invalid': patientForm.get('user.lastName')?.invalid && patientForm.get('user.lastName')?.touched}">
+                            <div *ngIf="patientForm.get('user.lastName')?.invalid && patientForm.get('user.lastName')?.touched"
+                                class="invalid-feedback">
+                                Last name is required and must be at least 2 characters.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="email">Email*</label>
+                            <input type="email" class="form-control" id="email" formControlName="email"
+                                [ngClass]="{'is-invalid': patientForm.get('user.email')?.invalid && patientForm.get('user.email')?.touched}">
+                            <div *ngIf="patientForm.get('user.email')?.invalid && patientForm.get('user.email')?.touched"
+                                class="invalid-feedback">
+                                Please enter a valid email address.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="phoneNumber">Phone Number*</label>
+                            <input type="tel" class="form-control" id="phoneNumber" formControlName="phoneNumber"
+                                maxlength="10" pattern="[0-9+]{10}" [ngClass]="{
+                                'is-invalid':
+                                  patientForm.get('user.phoneNumber')?.invalid &&
+                                  patientForm.get('user.phoneNumber')?.touched
+                              }" />
+                            <div *ngIf="
+                                patientForm.get('user.phoneNumber')?.invalid &&
+                                patientForm.get('user.phoneNumber')?.touched
+                              " class="invalid-feedback">
+                                Please enter a valid phone number (10 digits).
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password*</label>
+                    <input type="password" class="form-control" id="password" formControlName="password"
+                        [ngClass]="{'is-invalid': patientForm.get('user.password')?.invalid && patientForm.get('user.password')?.touched}">
+                    <div *ngIf="patientForm.get('user.password')?.invalid && patientForm.get('user.password')?.touched"
+                        class="invalid-feedback">
+                        Password is required and must be at least 8 characters.
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <!-- Patient Specific Information -->
+        <fieldset class="mb-4">
+            <legend>Patient Details</legend>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="nationalID">National ID*</label>
+                        <input type="text" class="form-control" id="nationalID" formControlName="nationalID"
+                            [ngClass]="{'is-invalid': patientForm.get('nationalID')?.invalid && patientForm.get('nationalID')?.touched}">
+                        <div *ngIf="patientForm.get('nationalID')?.invalid && patientForm.get('nationalID')?.touched"
+                            class="invalid-feedback">
+                            National ID is required and must be 10 digits.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="dateOfBirth">Date of Birth* (YYYY-MM-DD)</label>
+                        <input type="text" class="form-control" id="dateOfBirth" formControlName="dateOfBirth"
+                            placeholder="YYYY-MM-DD"
+                            [ngClass]="{'is-invalid': patientForm.get('dateOfBirth')?.invalid && patientForm.get('dateOfBirth')?.touched}">
+                        <div *ngIf="patientForm.get('dateOfBirth')?.invalid && patientForm.get('dateOfBirth')?.touched"
+                            class="invalid-feedback">
+                            Please enter a valid date in YYYY-MM-DD format.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="gender">Gender*</label>
+                        <select class="form-control" id="gender" formControlName="gender"
+                            [ngClass]="{'is-invalid': patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched}">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                        <div *ngIf="patientForm.get('gender')?.invalid && patientForm.get('gender')?.touched"
+                            class="invalid-feedback">
+                            Please select a gender.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="bloodType">Blood Type*</label>
+                        <select class="form-control" id="bloodType" formControlName="bloodType"
+                            [ngClass]="{'is-invalid': patientForm.get('bloodType')?.invalid && patientForm.get('bloodType')?.touched}">
+                            <option value="">Select Blood Type</option>
+                            <option value="A+">A+</option>
+                            <option value="A-">A-</option>
+                            <option value="B+">B+</option>
+                            <option value="B-">B-</option>
+                            <option value="AB+">AB+</option>
+                            <option value="AB-">AB-</option>
+                            <option value="O+">O+</option>
+                            <option value="O-">O-</option>
+                        </select>
+                        <div *ngIf="patientForm.get('bloodType')?.invalid && patientForm.get('bloodType')?.touched"
+                            class="invalid-feedback">
+                            Please select a blood type.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="allergies">Allergies</label>
+                <textarea class="form-control" id="allergies" formControlName="allergies" rows="2"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="chronicDiseases">Chronic Diseases</label>
+                <textarea class="form-control" id="chronicDiseases" formControlName="chronicDiseases"
+                    rows="2"></textarea>
+            </div>
+        </fieldset>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"
+                    aria-hidden="true"></span>
+                {{ isLoading ? 'Creating...' : 'Create Patient' }}
+            </button>
+        </div>
+    </form>
+</div>
