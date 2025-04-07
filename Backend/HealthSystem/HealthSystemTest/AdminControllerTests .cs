@@ -1,4 +1,4 @@
-﻿using HealthSystem.Controllers;
+using HealthSystem.Controllers;
 using HealthSystem.Data;
 using HealthSystem.Models;
 using Microsoft.AspNetCore.Mvc;
