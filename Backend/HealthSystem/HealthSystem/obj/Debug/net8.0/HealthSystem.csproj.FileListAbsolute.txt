@@ -439,10 +439,8 @@ C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\obj\Debug
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\obj\Debug\net8.0\HealthSystem.genruntimeconfig.cache
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\obj\Debug\net8.0\ref\HealthSystem.dll
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
-<<<<<<< HEAD
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Bugsnag.dll
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Bugsnag.AspNet.Core.dll
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll
-=======
 >>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
 >>>>>>> a9953e50267a82bb029f7565b80cc96486056262
