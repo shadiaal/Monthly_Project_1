@@ -161,3 +161,6 @@ C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\obj\D
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\obj\Debug\net8.0\HealthSystemTest.pdb
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\obj\Debug\net8.0\HealthSystemTest.genruntimeconfig.cache
 C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\obj\Debug\net8.0\ref\HealthSystemTest.dll
+C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\bin\Debug\net8.0\Bugsnag.dll
+C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\bin\Debug\net8.0\Bugsnag.AspNet.Core.dll
+C:\Users\rzonh\MP1\Monthly_Project_1\Backend\HealthSystem\HealthSystemTest\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll

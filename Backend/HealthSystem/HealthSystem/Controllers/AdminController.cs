@@ -25,6 +25,13 @@ namespace HealthSystem.Controllers
         {
             _context = context;
         }
+
+        [HttpGet("test-error")]
+        public IActionResult TestError()
+        {
+            throw new Exception("error with BugSnag");
+        }
+
         // ------- Admin & statistics -------
 
         [HttpGet("graph/barChart")]

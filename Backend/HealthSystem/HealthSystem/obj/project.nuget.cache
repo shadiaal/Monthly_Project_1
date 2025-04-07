@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "TOxtndsRZsw=",
+  "dgSpecHash": "8ptvdTU/V44=",
   "success": true,
   "projectFilePath": "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\rzonh\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
+    "C:\\Users\\rzonh\\.nuget\\packages\\bugsnag\\4.0.0\\bugsnag.4.0.0.nupkg.sha512",
+    "C:\\Users\\rzonh\\.nuget\\packages\\bugsnag.aspnet.core\\4.0.0\\bugsnag.aspnet.core.4.0.0.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\epplus\\7.7.0\\epplus.7.7.0.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\epplus.interfaces\\7.7.0\\epplus.interfaces.7.7.0.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\epplus.system.drawing\\7.7.0\\epplus.system.drawing.7.7.0.nupkg.sha512",
@@ -36,6 +38,7 @@
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.1\\microsoft.extensions.dependencyinjection.8.0.1.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.dependencymodel\\8.0.0\\microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
+    "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.diagnosticadapter\\3.1.32\\microsoft.extensions.diagnosticadapter.3.1.32.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\8.0.0\\microsoft.extensions.fileproviders.abstractions.8.0.0.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\8.0.0\\microsoft.extensions.fileproviders.physical.8.0.0.nupkg.sha512",
     "C:\\Users\\rzonh\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\8.0.0\\microsoft.extensions.filesystemglobbing.8.0.0.nupkg.sha512",

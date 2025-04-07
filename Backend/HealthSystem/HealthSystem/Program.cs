@@ -2,6 +2,8 @@ using HealthSystem.Data;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using MySql.EntityFrameworkCore.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Bugsnag.AspNet.Core;
+using Microsoft.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Configure BugSnag
+builder.Services.AddBugsnag(configuration =>
+{
+    configuration.ApiKey = "cc8bdb23dae08cfcc5e4eb3429eced49"; 
+});
 
 // Retrieve the DB_PASSWORD from environment variables
 var dbPassword = builder.Configuration["DB_PASSWORD"];
@@ -53,6 +60,25 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Add BugSnag Middleware to handle unhandled exceptions
+// Â‰« ‰” Œœ„ ILogger · ”ÃÌ· «·√Œÿ«¡ ›Ì BugSnag
+// «” Œœ„ `ILogger` ·«· ﬁ«ÿ «·√Œÿ«¡
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next.Invoke();
+    }
+    catch (Exception ex)
+    {
+        // ”Ã· «·Œÿ√ ›Ì BugSnag »«” Œœ«„ `ILogger`
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred");
+
+        // √⁄œ ≈·ﬁ«¡ «·«” À‰«¡ »⁄œ  ”ÃÌ·Â
+        throw;
+    }
+});
 app.UseAuthorization();
 
 app.MapControllerRoute(
