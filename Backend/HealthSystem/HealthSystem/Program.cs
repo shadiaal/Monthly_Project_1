@@ -23,6 +23,12 @@ var dbPassword = builder.Configuration["DB_PASSWORD"];
 // Update the connection string with the password from the environment variable
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection").Replace("{DB_PASSWORD}", dbPassword);
 
+// Retrieve the DB_PASSWORD from environment variables
+var dbPassword = builder.Configuration["DB_PASSWORD"];
+
+// Update the connection string with the password from the environment variable
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection").Replace("{DB_PASSWORD}", dbPassword);
+
 // Configure DbContext with MySQL
 builder.Services.AddDbContext<AppDbContext>(options =>
 	options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
@@ -63,6 +69,13 @@ if (app.Environment.IsDevelopment())
 	app.UseSwagger();
 	app.UseSwaggerUI();
 }
+//else
+//{
+//    app.UseExceptionHandler("/Home/Error");
+//    app.UseHsts();
+//}
+// Enable CORS (Cross-Origin Requests)
+app.UseCors("AllowAngularApp");
 
 //else
 //{

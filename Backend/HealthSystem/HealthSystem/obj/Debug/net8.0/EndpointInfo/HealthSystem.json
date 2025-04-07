@@ -5,6 +5,64 @@
     "version": "1.0"
   },
   "paths": {
+<<<<<<< HEAD
+=======
+    "/api/admin/graph/barChart": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/graph/piechart": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/create-patient": {
+      "post": {
+        "tags": [
+          "Admin"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientCreateRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientCreateRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PatientCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "/api/admin/create-doctor": {
       "post": {
         "tags": [
@@ -36,26 +94,57 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/Auth/signin": {
       "post": {
         "tags": [
           "Auth"
+=======
+    "/api/admin/doctors": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/appointments/create": {
+      "post": {
+        "tags": [
+          "Admin"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
+<<<<<<< HEAD
                 "$ref": "#/components/schemas/SignIn"
+=======
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             },
             "text/json": {
               "schema": {
+<<<<<<< HEAD
                 "$ref": "#/components/schemas/SignIn"
+=======
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             },
             "application/*+json": {
               "schema": {
+<<<<<<< HEAD
                 "$ref": "#/components/schemas/SignIn"
+=======
+                "$ref": "#/components/schemas/CreateAppointmentRequest"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             }
           }
@@ -67,6 +156,7 @@
         }
       }
     },
+<<<<<<< HEAD
     "/api/Doctor/{id}": {
       "get": {
         "tags": [
@@ -75,6 +165,16 @@
         "parameters": [
           {
             "name": "id",
+=======
+    "/api/admin/download-excel/{doctorId}": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "doctorId",
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "in": "path",
             "required": true,
             "schema": {
@@ -85,6 +185,7 @@
         ],
         "responses": {
           "200": {
+<<<<<<< HEAD
             "description": "OK",
             "content": {
               "text/plain": {
@@ -103,10 +204,14 @@
                 }
               }
             }
+=======
+            "description": "OK"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
           }
         }
       }
     },
+<<<<<<< HEAD
     "/api/Doctor/{id}/appointments": {
       "get": {
         "tags": [
@@ -191,6 +296,30 @@
             }
           }
         },
+=======
+    "/api/admin/getAllAvailablAappointments": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "clinic",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ClinicType"
+            }
+          }
+        ],
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "responses": {
           "200": {
             "description": "OK"
@@ -201,6 +330,7 @@
   },
   "components": {
     "schemas": {
+<<<<<<< HEAD
       "Appointment": {
         "required": [
           "appointmentDate",
@@ -272,6 +402,8 @@
         "type": "integer",
         "format": "int32"
       },
+=======
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
       "ClinicType": {
         "enum": [
           0,
@@ -288,6 +420,7 @@
         "type": "integer",
         "format": "int32"
       },
+<<<<<<< HEAD
       "CreateDoctorRequest": {
         "type": "object",
         "properties": {
@@ -397,10 +530,107 @@
           "allergies": {
             "maxLength": 500,
             "minLength": 0,
+=======
+      "CreateAppointmentRequest": {
+        "type": "object",
+        "properties": {
+          "patientID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "doctorID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointmentTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CreateDoctorRequest": {
+        "type": "object",
+        "properties": {
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "specialization": {
+            "type": "string",
+            "nullable": true
+          },
+          "clinic": {
+            "type": "string",
+            "nullable": true
+          },
+          "workingHours": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/WorkingHoursRequest"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "PatientCreateRequest": {
+        "type": "object",
+        "properties": {
+          "user": {
+            "$ref": "#/components/schemas/UserRequest"
+          },
+          "nationalID": {
+            "type": "string",
+            "nullable": true
+          },
+          "dateOfBirth": {
+            "type": "string",
+            "nullable": true
+          },
+          "gender": {
+            "type": "string",
+            "nullable": true
+          },
+          "bloodType": {
+            "type": "string",
+            "nullable": true
+          },
+          "allergies": {
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "type": "string",
             "nullable": true
           },
           "chronicDiseases": {
+<<<<<<< HEAD
             "maxLength": 500,
             "minLength": 0,
             "type": "string",
@@ -427,12 +657,15 @@
             "format": "uuid"
           },
           "password": {
+=======
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
+<<<<<<< HEAD
       "User": {
         "required": [
           "email",
@@ -493,6 +726,9 @@
         "additionalProperties": false
       },
       "UserDto": {
+=======
+      "UserRequest": {
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "type": "object",
         "properties": {
           "firstName": {
@@ -518,14 +754,18 @@
           "password": {
             "type": "string",
             "nullable": true
+<<<<<<< HEAD
           },
           "role": {
             "type": "string",
             "nullable": true
+=======
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
           }
         },
         "additionalProperties": false
       },
+<<<<<<< HEAD
       "UserRole": {
         "enum": [
           0,
@@ -567,6 +807,9 @@
         "additionalProperties": false
       },
       "WorkingHoursDto": {
+=======
+      "WorkingHoursRequest": {
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "type": "object",
         "properties": {
           "day": {
@@ -583,6 +826,7 @@
           }
         },
         "additionalProperties": false
+<<<<<<< HEAD
       },
       "dayOfWeek": {
         "enum": [
@@ -596,6 +840,8 @@
         ],
         "type": "integer",
         "format": "int32"
+=======
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
       }
     }
   }

@@ -1,3 +1,6 @@
+# Ignore personal user's secrets
+secrets.json
+
 # Ignore build results
 /bin/
 /obj/
@@ -26,3 +29,15 @@ Thumbs.db         # Windows
 
 # Ignore Visual Studio-specific files
 .vs/
+
+# ASP.NET Core Environment Specific
+appsettings.json
+appsettings.Development.json
+
+# Compiled Files
+*.dll
+*.exe
+*.pdb
+
+# Angular/Frontend build artifacts
+dist/

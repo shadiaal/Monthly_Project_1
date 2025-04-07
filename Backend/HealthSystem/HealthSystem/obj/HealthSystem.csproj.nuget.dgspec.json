@@ -50,9 +50,13 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "BCrypt.Net-Next": {
               "target": "Package",
-              "version": "[8.0.14, )"
+              "version": "[4.0.3, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[7.7.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -72,9 +76,17 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "System.IdentityModel.Tokens.Jwt": {
+            "Swashbuckle.AspNetCore.Swagger": {
               "target": "Package",
-              "version": "[8.7.0, )"
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[8.0.0, )"
             }
           },
           "imports": [

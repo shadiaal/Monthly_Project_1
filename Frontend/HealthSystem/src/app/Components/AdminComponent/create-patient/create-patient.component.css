@@ -1,0 +1,22 @@
+/* create-patient.component.css */
+fieldset {
+    border: 1px solid #ddd;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+legend {
+    width: auto;
+    padding: 0 10px;
+    font-size: 1.2rem;
+    color: #495057;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.invalid-feedback {
+    display: block;
+}
