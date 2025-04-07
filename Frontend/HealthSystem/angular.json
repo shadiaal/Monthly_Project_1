@@ -27,7 +27,9 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css"
             ],
             "scripts": [],
             "server": "src/main.server.ts",
@@ -99,6 +101,6 @@
     }
   },
   "cli": {
-    "analytics": "ae835b20-3517-45b6-b4da-f0229c4e2df3"
+    "analytics": "f2d99acb-1b6f-4121-a63e-34946a6d0412"
   }
 }
