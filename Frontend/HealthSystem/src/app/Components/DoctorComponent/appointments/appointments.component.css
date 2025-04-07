@@ -1,0 +1,58 @@
+.appointments-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.filters {
+  display: grid;
+  align-items: center;
+  width: auto;
+  justify-content: space-between;  
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 15px;
+}
+
+label {
+  font-size: small;
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+input, select {
+  height: 30px;
+  padding: 5px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+input {
+  width: 200px;
+}
+
+select {
+  width: 150px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 10px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+

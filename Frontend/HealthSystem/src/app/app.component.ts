@@ -1,12 +1,30 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { RouterOutlet, Router } from '@angular/router';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
+  standalone: true,  
+  imports: [RouterOutlet, RouterModule],  
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']  
 })
 export class AppComponent {
   title = 'HealthSystem';
+
+  // constructor(private router: Router) {}
+
+  // // Navigate to Doctor Info Page
+  // navigateToInfo() {
+  //   this.router.navigate(['/Information']);
+  // }
+
+  // // Navigate to Appointments Page
+  // navigateToAppointments() {
+  //   this.router.navigate(['/appointments']);
+  // }
+  // // Navigate to Login Page
+  // navigateToLogin(){
+  //   this.router.navigate(['/Login']);
+  // }
 }

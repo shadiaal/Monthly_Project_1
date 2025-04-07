@@ -1,0 +1,94 @@
+
+<div class="container-fluid mt-4">
+  <h2 class="mb-3 fw-bold">Appointments</h2>
+  
+  <!-- Filter Bar -->
+  <div class="d-flex gap-3 mb-3">
+  
+<!-- Status Filter -->
+<div>
+  <label for="status" class="me-2 fw-semibold">Filter by status:</label>
+  <select id="status" class="form-select" [(ngModel)]="statusFilter" style="width: 150px;">
+    <option value="">All</option>
+    <option value="Upcoming">Upcoming</option>
+    <option value="Current">Current</option>
+    <option value="Past">Past</option>
+  </select>
+</div>
+</div>
+
+  <!-- Appointments Table -->
+  <div class="table-responsive bg-white shadow-sm rounded">
+    <table class="table table-striped align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Patient Name</th>
+          <th>Status</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of appointments" class="border p-4 rounded mb-4 shadow-sm">
+          <td>{{ appointment.appointmentDate }}</td>
+          <td>{{ appointment.appointmentTime }}</td>
+        
+          <td>{{ appointment.patient.user.firstName }} {{ appointment.patient.user.middleName }} {{ appointment.patient.user.lastName }}</td>
+
+          <td>
+            <span class="badge" 
+                  [ngClass]="{
+                    'bg-success': appointment.status === 0, 
+                    'bg-warning': appointment.status === 1, 
+                    'bg-danger': appointment.status === 2
+                  }">
+              {{ appointment.status === 0 ? 'Upcoming' : (appointment.status === 1 ? 'Current' : 'Past') }}
+            </span>
+          </td>
+          <td>
+            <button class="btn btn-success btn-sm" (click)="openPopup(appointment.appointmentID)">
+              Add Note
+            </button>
+        
+
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal for Adding Note --> 
+ <div class="modal fade show d-block" *ngIf="isModalOpen" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Did the patient attend the appointment?</h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+     <div class="modal-body">
+
+        <textarea class="form-control mt-3" [(ngModel)]="note" placeholder="Type your note here..."></textarea>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+        <button class="btn btn-primary" (click)="saveNote()">Save</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
