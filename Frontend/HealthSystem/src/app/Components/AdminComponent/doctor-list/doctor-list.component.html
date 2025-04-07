@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="card">
+    <div class="card-header">
+      <h2>Doctors List</h2>
+      <p class="subtitle">Manage and download doctor information</p>
+    </div>
+
+    <div class="card-body">
+      <!--<div class="toolbar">
+        <button mat-raised-button class="refresh-btn" (click)="refreshDoctors()">
+         Refresh List
+        </button>
+      </div>-->
+
+      <!-- Loading State -->
+      <div *ngIf="isLoading" class="loading-state">
+        <mat-spinner diameter="50"></mat-spinner>
+        <p>Loading doctors...</p>
+      </div>
+
+      <!-- Error State -->
+      <div *ngIf="errorMessage" class="alert alert-danger">
+        {{ errorMessage }}
+        <button mat-icon-button class="close-btn" (click)="errorMessage = ''">
+          X
+        </button>
+      </div>
+
+      <!-- Empty State -->
+      <div *ngIf="!isLoading && doctors.length === 0" class="alert alert-info">
+        No doctors found.
+      </div>
+
+      <!-- Doctors Table -->
+      <div *ngIf="!isLoading && doctors.length > 0" class="table-container">
+        <table mat-table [dataSource]="doctors">
+          <!-- Name Column -->
+          <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Name</th>
+            <td mat-cell *matCellDef="let doctor">
+              <div class="doctor-name">
+                {{ doctor.user.firstName }} {{ doctor.user.lastName }}
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Email Column -->
+          <ng-container matColumnDef="email">
+            <th mat-header-cell *matHeaderCellDef>Email</th>
+            <td mat-cell *matCellDef="let doctor">
+              <div class="doctor-email">
+                
+                <a href="mailto:{{doctor.user.email}}">{{ doctor.user.email }}</a>
+              </div>
+            </td>
+          </ng-container>
+
+          <!-- Specialization Column -->
+          <ng-container matColumnDef="specialization">
+            <th mat-header-cell *matHeaderCellDef>Specialization</th>
+            <td mat-cell *matCellDef="let doctor">
+              <span class="specialization-badge">
+                {{ doctor.specialization }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Clinic Column -->
+          <ng-container matColumnDef="clinic">
+            <th mat-header-cell *matHeaderCellDef>Clinic</th>
+            <td mat-cell *matCellDef="let doctor">
+              <span class="clinic-badge">
+                {{ clinicNames[doctor.clinic] || 'Unknown Clinic' }}
+              </span>
+            </td>
+          </ng-container>
+
+          <!-- Actions Column -->
+          <ng-container matColumnDef="actions">
+            <th mat-header-cell *matHeaderCellDef>Actions</th>
+            <td mat-cell *matCellDef="let doctor">
+              <button mat-raised-button class="download-btn" (click)="downloadDoctorExcel(doctor.user.id)">
+                Download
+              </button>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

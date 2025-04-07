@@ -1,0 +1,141 @@
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.card-header {
+  background-color: #3f51b5;
+  color: white;
+  padding: 16px 24px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.card-header .subtitle {
+  margin: 4px 0 0;
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+.card-body {
+  padding: 24px;
+}
+
+.toolbar {
+  margin-bottom: 20px;
+}
+
+.refresh-btn {
+  background-color: #3f51b5;
+  color: white;
+  border-radius: 4px;
+  padding: 8px 16px;
+}
+
+.refresh-btn:hover {
+  background-color: #303f9f;
+}
+
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+}
+
+.mat-header-cell {
+  background-color: #f5f5f5;
+  font-weight: 500;
+  padding: 12px 16px;
+}
+
+.mat-cell {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.mat-row:hover {
+  background-color: #f5f5f5;
+}
+
+.doctor-name, .doctor-email {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.specialization-badge, .clinic-badge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.specialization-badge {
+  background-color: #e3f2fd;
+  color: #1976d2;
+}
+
+.clinic-badge {
+  background-color: #e8eaf6;
+  color: #3f51b5;
+}
+
+.download-btn {
+  background-color: #4caf50;
+  color: white;
+  border-radius: 4px;
+}
+
+.download-btn:hover {
+  background-color: #388e3c;
+}
+
+.alert {
+  padding: 16px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.alert-danger {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+.alert-info {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.close-btn {
+  color: inherit;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mat-spinner {
+  margin: 0 auto;
+}

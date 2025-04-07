@@ -1,0 +1,160 @@
+<!-- create-doctor.component.html -->
+<div class="container mt-4">
+    <h2>Create New Doctor</h2>
+    
+    <div *ngIf="errorMessage" class="alert alert-danger">
+      {{ errorMessage }}
+    </div>
+    
+    <div *ngIf="successMessage" class="alert alert-success">
+      {{ successMessage }}
+    </div>
+  
+    <form [formGroup]="doctorForm" (ngSubmit)="onSubmit()">
+      <!-- Personal Information -->
+      <div class="card mb-3">
+        <div class="card-header">Personal Information</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>First Name*</label>
+                <input type="text" class="form-control" formControlName="firstName">
+                <div *ngIf="doctorForm.get('firstName')?.invalid && doctorForm.get('firstName')?.touched" class="text-danger">
+                  First name is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Middle Name</label>
+                <input type="text" class="form-control" formControlName="middleName">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label>Last Name*</label>
+                <input type="text" class="form-control" formControlName="lastName">
+                <div *ngIf="doctorForm.get('lastName')?.invalid && doctorForm.get('lastName')?.touched" class="text-danger">
+                  Last name is required
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Email*</label>
+                <input type="email" class="form-control" formControlName="email">
+                <div *ngIf="doctorForm.get('email')?.invalid && doctorForm.get('email')?.touched" class="text-danger">
+                  Valid email is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Phone Number*</label>
+                <input type="tel" class="form-control" formControlName="phoneNumber">
+                <div *ngIf="doctorForm.get('phoneNumber')?.invalid && doctorForm.get('phoneNumber')?.touched" class="text-danger">
+                  Phone number is required
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Password*</label>
+                <input type="password" class="form-control" formControlName="password">
+                <div *ngIf="doctorForm.get('password')?.invalid && doctorForm.get('password')?.touched" class="text-danger">
+                  Password must be at least 6 characters
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Gender*</label>
+                <select class="form-control" formControlName="gender">
+                  <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Professional Information -->
+      <div class="card mb-3">
+        <div class="card-header">Professional Information</div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Specialization*</label>
+                <input type="text" class="form-control" formControlName="specialization">
+                <div *ngIf="doctorForm.get('specialization')?.invalid && doctorForm.get('specialization')?.touched" class="text-danger">
+                  Specialization is required
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Clinic*</label>
+                <select class="form-control" formControlName="clinic">
+                  <option *ngFor="let clinic of clinics" [value]="clinic">{{ clinic }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- Working Hours -->
+      <div class="card mb-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <span>Working Hours</span>
+          <button type="button" class="btn btn-sm btn-primary" (click)="addWorkingHours()">Add Hours</button>
+        </div>
+        <div class="card-body" formArrayName="workingHours">
+          <div *ngFor="let hour of workingHoursArray.controls; let i = index" [formGroupName]="i" class="mb-3 border-bottom pb-3">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Day*</label>
+                  <select class="form-control" formControlName="day">
+                    <option *ngFor="let day of daysOfWeek" [value]="day">{{ day }}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>Start Time*</label>
+                  <input type="time" class="form-control" formControlName="startTime">
+                </div>
+              </div>
+              <div class="col-md-3">
+                <div class="form-group">
+                  <label>End Time*</label>
+                  <input type="time" class="form-control" formControlName="endTime">
+                </div>
+              </div>
+              <div class="col-md-3 d-flex align-items-end">
+                <button type="button" class="btn btn-sm btn-danger" (click)="removeWorkingHours(i)" [disabled]="workingHoursArray.length <= 1">
+                  Remove
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+          <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+          {{ isLoading ? 'Creating...' : 'Create Doctor' }}
+        </button>
+      </div>
+    </form>
+  </div>
