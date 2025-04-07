@@ -97,6 +97,12 @@
   ],
   "logs": [
     {
+      "code": "Undefined",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Problem reading the cache file C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\obj\\project.nuget.cache : Invalid property identifier character: <. Path 'version', line 3, position 0."
+    },
+    {
       "code": "NU1603",
       "level": "Warning",
       "warningLevel": 1,
