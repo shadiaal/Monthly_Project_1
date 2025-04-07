@@ -1,5 +1,4 @@
 <div class="dashboard-container container mt-4">
-    <h1 class="text-center mb-4">Admin Dashboard</h1>
 
     <div *ngIf="error" class="alert alert-danger">
         {{ error }} <button class="btn btn-sm btn-outline-danger ms-2" (click)="loadChartData()">Retry</button>
@@ -17,9 +16,6 @@
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
-                    <div *ngIf="barChartData && !barChartInitialized && !loading" class="alert alert-warning mt-2">
-                        Chart rendering... (if this persists, try refreshing)
-                    </div>
                 </div>
             </div>
         </div>
@@ -35,17 +31,9 @@
                             <span class="visually-hidden">Loading...</span>
                         </div>
                     </div>
-                    <div *ngIf="pieChartData && !pieChartInitialized && !loading" class="alert alert-warning mt-2">
-                        Chart rendering... (if this persists, try refreshing)
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="text-center mt-4">
-        <button class="btn btn-primary btn-lg" (click)="navigateToCreatePatient()">
-            Create New Patient
-        </button>
-    </div>
 </div>

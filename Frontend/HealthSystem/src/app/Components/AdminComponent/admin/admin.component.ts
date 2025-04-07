@@ -16,9 +16,5 @@ export class AdminComponent {
     private router: Router
   ) { }
 
-  // This method is no longer necessary if you use [routerLink] in the template
-  navigateTo(path: string) {
-    this.router.navigate([path]);
-  }
 
 }

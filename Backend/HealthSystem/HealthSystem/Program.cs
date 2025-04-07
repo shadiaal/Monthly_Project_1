@@ -10,7 +10,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 
-
 // Retrieve the DB_PASSWORD from environment variables
 var dbPassword = builder.Configuration["DB_PASSWORD"];
 

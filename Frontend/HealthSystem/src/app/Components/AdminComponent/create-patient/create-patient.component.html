@@ -176,8 +176,10 @@
             </div>
         </fieldset>
 
+
+        <!-- Submit Button-->
         <div class="form-group">
-            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+            <button type="submit" class="custom-btn" [disabled]="isLoading">
                 <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status"
                     aria-hidden="true"></span>
                 {{ isLoading ? 'Creating...' : 'Create Patient' }}
