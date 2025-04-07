@@ -289,7 +289,8 @@ namespace HealthSystem.Controllers
 
             // Step 1: Check if patient and doctor exist
             var patient = await _context.Patients.FindAsync(request.PatientID);
-            var doctor = await _context.Doctors.Include(d => d.WorkingHours)
+            var doctor = await _context.Doctors.Include(d => d.User)
+                                               .Include(d => d.WorkingHours)       
                                                .FirstOrDefaultAsync(d => d.UserID == request.DoctorID);
 
             if (patient == null || doctor == null)
@@ -299,14 +300,6 @@ namespace HealthSystem.Controllers
 
             // Step 2: Check if the appointment time is within the doctor's working hours
             var appointmentTime = TimeSpan.Parse(request.AppointmentTime);
-            //var appointmentDay = Enum.TryParse(request.AppointmentDate.ToString("dddd").ToUpper(), out dayOfWeek day) ? day : dayOfWeek.Monday;
-
-            //var workingHours = doctor.WorkingHours.FirstOrDefault(w => w.Day == appointmentDay);
-
-            //if (workingHours == null || appointmentTime < workingHours.StartTime || appointmentTime > workingHours.EndTime)
-            //{
-            //    return BadRequest("The doctor is not available at the selected time.");
-            //}
 
             // Step 3: Create the new appointment
             var appointment = new Appointment
@@ -323,8 +316,11 @@ namespace HealthSystem.Controllers
             await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
 
+       
             // Return success message
-            return Ok(new { message = "Appointment created successfully" });
+            return Ok(new { message = "Appointment created successfully" 
+           
+            });
         }
 
 
@@ -425,6 +421,7 @@ namespace HealthSystem.Controllers
                         availableAppointments.Add(new
                         {
                             DoctorName = $"{doctor.User.FirstName} {doctor.User.LastName}",
+                            DoctorID=doctor.User.UserID,
                             Specialization = doctor.Specialization,
                             Clinic = doctor.Clinic,
                             AvailableTimeSlots = availableTimeSlots

@@ -1,0 +1,103 @@
+<div class="container mt-5">
+    <h2>Create Appointment</h2>
+  
+    <!-- Date Selection -->
+    <div class="form-group">
+      <label for="appointmentDate">Date:</label>
+      <input type="date" id="appointmentDate" class="form-control" [(ngModel)]="date" (change)="getAvailableAppointments()" />
+    </div>
+  
+    <!-- Clinic Selection -->
+    <div class="form-group">
+      <label for="clinic">Clinic:</label>
+      <select id="clinic" class="form-control" [(ngModel)]="clinic" (change)="getAvailableAppointments()">
+        <option value="0">General</option>
+        <option value="1">Cardiology</option>
+        <option value="2">Dermatology</option>
+        <option value="3">Pediatrics</option>
+        <option value="4">Orthopedics</option>
+        <option value="5">Neurology</option>
+        <option value="6">Dentistry</option>
+        <option value="7">Ophthalmology</option>
+        <option value="8">Psychiatry</option>
+        <option value="9">Gynecology</option>
+      </select>
+    </div>
+  
+    <!-- Available Appointments Display in Table Format -->
+    <div *ngIf="availableAppointments.length > 0">
+      <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th>Doctor Name</th>
+            <th>Specialization</th>
+            <th>Available Time Slots</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let doctor of availableAppointments">
+            <td>{{ doctor.doctorName }}</td>
+            <td>{{ doctor.specialization }}</td>
+            <td>
+              <!-- Using Bootstrap's row and col classes to align slots horizontally -->
+              <div class="d-flex flex-wrap">
+                <button *ngFor="let slot of doctor.availableTimeSlots" class="btn btn-primary btn-sm m-1" (click)="openModal(doctor, slot, doctor.doctorID)">
+                  {{ slot }}
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <!-- Success or Error Message (Bootstrap-style Alert) -->
+    <div *ngIf="successMessage" class="alert alert-success alert-dismissible fade show" role="alert">
+      {{ successMessage }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
+      {{ errorMessage }}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  
+    <!-- Appointment Modal (Popup) -->
+    <div *ngIf="showModal" class="modal fade show" tabindex="-1" style="display: block;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Appointment Summary</h5>
+            <button type="button" class="close" (click)="closeModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p><strong>Doctor:</strong> {{ selectedDoctor?.doctorName }}</p>
+            <p><strong>Specialization:</strong> {{ selectedDoctor?.specialization }}</p>
+            <p><strong>Time Slot:</strong> {{ selectedTime }}</p>
+  
+            <!-- Patient ID Input -->
+            <div class="form-group">
+              <label for="patientId">Patient ID:</label>
+              <input type="text" id="patientId" class="form-control" [(ngModel)]="patientId" />
+            </div>
+            
+            <!-- Error Message Display -->
+            <div *ngIf="errorMessage" class="text-danger">
+              <p>{{ errorMessage }}</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+            <button type="button" class="btn btn-primary" (click)="createAppointment()">Create Appointment</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

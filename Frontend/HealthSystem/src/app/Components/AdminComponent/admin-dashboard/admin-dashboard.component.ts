@@ -215,4 +215,7 @@ export class AdminDashboardComponent implements OnInit, AfterViewInit, AfterView
   navigateToCreatePatient(): void {
     this.router.navigate(['/admin/createPatient']);
   }
+  navigateToCreateDoctor(): void {
+    this.router.navigate(['/admin/create-doctor']);
+  }
 }

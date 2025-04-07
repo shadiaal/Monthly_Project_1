@@ -47,5 +47,14 @@
         <button class="btn btn-primary btn-lg" (click)="navigateToCreatePatient()">
             Create New Patient
         </button>
+        <button (click)="navigateToCreateDoctor()" class="btn btn-primary">
+            Create New Doctor
+          </button>
+          <button mat-raised-button color="primary" routerLink="/admin/doctors">
+            View Doctors
+          </button>
+          <button mat-raised-button color="primary" routerLink="/admin/appointments/create">
+          Create Appointment
+          </button>
     </div>
 </div>
