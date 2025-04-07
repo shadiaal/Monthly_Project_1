@@ -1,0 +1,26 @@
+ <div class="sidebar">
+    <ul>
+      <br>
+      <hr>
+      <li (click)="showInformation()"><i class="fa-solid fa-circle-info"></i> Information</li>
+      <li (click)="showAppointments()"><i class="fa-solid fa-calendar-check"></i> Appointments</li>
+      
+      <li (click)="showLogin()"> <i class="fa-solid fa-right-from-bracket"></i>Sign out</li>
+     
+    </ul>
+   
+  </div>
+  
+  <div class="main-content">
+ 
+     <!-- User Info at the top right --> 
+     <div class="d-flex justify-content-end align-items-center mb-3">
+      <i class="fa-regular fa-circle-user me-2"></i> <strong>Hello, {{doctorName}}</strong>
+    </div>
+    <router-outlet></router-outlet>
+  </div>  
+
+
+
+  
+  

@@ -2,6 +2,9 @@ using HealthSystem.Data;
 using Pomelo.EntityFrameworkCore.MySql.Infrastructure;
 using MySql.EntityFrameworkCore.Extensions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 using Bugsnag.AspNet.Core;
 using Microsoft.Extensions.Logging;
 
@@ -10,6 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
 
 // Configure BugSnag
 builder.Services.AddBugsnag(configuration =>
@@ -25,28 +33,45 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Configure DbContext with MySQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+	options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // CORS Configuration
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularApp", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200") // The URL of your Angular app
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+	options.AddPolicy("AllowAngularApp", policy =>
+	{
+		policy.WithOrigins("http://localhost:4200") // The URL of your Angular app
+			  .AllowAnyHeader()
+			  .AllowAnyMethod();
+	});
 });
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = true,
+			ValidateAudience = true,
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			ValidIssuer = builder.Configuration["Jwt:Issuer"],
+			ValidAudience = builder.Configuration["Jwt:Audience"],
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+		};
+	});
+
 builder.Services.AddSwaggerGen();
-builder.Services.AddControllers();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
+
 //else
 //{
 //    app.UseExceptionHandler("/Home/Error");
@@ -59,10 +84,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
 // Add BugSnag Middleware to handle unhandled exceptions
-// Â‰« ‰” Œœ„ ILogger · ”ÃÌ· «·√Œÿ«¡ ›Ì BugSnag
-// «” Œœ„ `ILogger` ·«· ﬁ«ÿ «·√Œÿ«¡
 app.Use(async (context, next) =>
 {
     try
@@ -71,18 +95,17 @@ app.Use(async (context, next) =>
     }
     catch (Exception ex)
     {
-        // ”Ã· «·Œÿ√ ›Ì BugSnag »«” Œœ«„ `ILogger`
         var logger = app.Services.GetRequiredService<ILogger<Program>>();
         logger.LogError(ex, "An error occurred");
 
-        // √⁄œ ≈·ﬁ«¡ «·«” À‰«¡ »⁄œ  ”ÃÌ·Â
+       
         throw;
     }
 });
 app.UseAuthorization();
 
 app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

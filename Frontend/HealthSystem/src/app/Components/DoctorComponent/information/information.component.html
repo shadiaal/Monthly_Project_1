@@ -1,0 +1,43 @@
+
+    <div *ngIf="DoctorData" class="container">
+    <h2>General information</h2>
+    <hr>
+    <div class="grid">
+      <div class="info-box">
+        <p>First Name</p>
+        <span>{{ DoctorData.user.firstName }}</span>
+      </div>
+      <div class="info-box">
+        <p>Middle Name</p>
+        <span>{{ DoctorData.user.middleName }}</span>
+      </div>
+      <div class="info-box">
+        <p>Last Name</p>
+        <span>{{ DoctorData.user.lastName }}</span>
+      </div>
+     
+      <div class="info-box">
+        <p>Gender</p>
+       
+        <span>{{ DoctorData.gender === 0 ? 'Male' : 'Female' }}</span>
+
+      </div>
+    
+      <div class="info-box">
+        <p>Phone</p>
+        <span>{{ DoctorData.user.phoneNumber }}</span>
+      </div>
+      <div class="info-box">
+        <p>Email</p>
+        <span>{{ DoctorData.user.email }}</span>
+      </div>
+      <div class="info-box">
+        <p>Specialty</p>
+        <span>{{ DoctorData.specialization }}</span>
+      </div>
+    </div>
+  </div>
+  
+  
+
+
