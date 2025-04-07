@@ -1,0 +1,28 @@
+<div class="sidebar">
+    <ul>
+        <br>
+        <hr>
+        <li [routerLink]="['/admin/dashboard']">
+            <i class="fa-solid fa-circle-info"></i> Dashboard
+        </li>
+        <li [routerLink]="['/admin/createPatient']">
+            <i class="fa-solid fa-circle-info"></i> Patient
+        </li>
+        <li [routerLink]="['/admin/doctors']">
+            <i class="fa-solid fa-circle-info"></i> Doctor
+        </li>
+        <li [routerLink]="['/admin/appointments']">
+            <i class="fa-solid fa-circle-info"></i> Appointments
+        </li>
+        <li> <i class="fa-solid fa-right-from-bracket"></i>Sign out</li>
+
+    </ul>
+</div>
+
+<div class="main-content">
+    <!-- User Info at the top right -->
+    <div class="d-flex justify-content-end align-items-center mb-3">
+        <i class="fa-regular fa-circle-user me-2"></i> <strong>Hello, Admin</strong>
+    </div>
+    <router-outlet></router-outlet>
+</div>

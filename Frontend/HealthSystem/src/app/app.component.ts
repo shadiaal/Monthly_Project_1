@@ -4,11 +4,15 @@ import { SigninComponent } from './Components/SignInComponent/sign-in/sign-in.co
 
 @Component({
   selector: 'app-root',
+  standalone: true,  
+  imports: [RouterOutlet],  
   standalone: true,
   imports: [RouterOutlet, SigninComponent], 
   templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']  
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'HealthSystem';
+
 }

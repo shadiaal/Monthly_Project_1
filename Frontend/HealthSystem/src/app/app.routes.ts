@@ -1,38 +1,48 @@
-import { Routes } from '@angular/router';
+
+
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AppointmentsComponent } from './Components/DoctorComponent/appointments/appointments.component';
+import { InformationComponent } from './Components/DoctorComponent/information/information.component';
 import { SigninComponent } from './Components/SignInComponent/sign-in/sign-in.component';
-import { PatientDashboardComponent } from './Components/PatientComponent/patient-dashboard/patient-dashboard.component';
-
-
+import { DoctorDashboardComponent } from './Components/DoctorComponent/doctor-dashboard/doctor-dashboard.component';
+import { AdminComponent } from './Components/AdminComponent/admin/admin.component';
+import { CreatePatientComponent } from './Components/AdminComponent/create-patient/create-patient.component';
+import { AppComponent } from './app.component';
+import { AdminDashboardComponent } from './Components/AdminComponent/admin-dashboard/admin-dashboard.component';
+import { CreateDoctorComponent } from './Components/AdminComponent/create-doctor/create-doctor.component';
+import { DoctorListComponent } from './Components/AdminComponent/doctor-list/doctor-list.component';
+import { AppointmentCreateComponent } from './Components/AdminComponent/appointment-create/appointment-create.component';
 export const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: 'signin', component: SigninComponent },
-  { path: 'patient-dashboard', component: PatientDashboardComponent }
-];
-
-/*
-import { authGuard } from './guards/auth.guard';
-
-export const routes: Routes = [
-  { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: 'signin', component: SigninComponent },
-
   {
-    path: 'patient-dashboard',
-    component: PatientDashboardComponent,
-    canActivate: [authGuard(['Patient'])]
-  },
+    path: 'admin',
+    component: AdminComponent, // يحتوي على sidebar
+    children: [
+        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+        { path: 'dashboard', component: AdminDashboardComponent },
+        { path: 'createPatient', component: CreatePatientComponent },
+    ],
+},
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
+  { path: 'signin', component: SigninComponent },
   {
     path: 'doctor-dashboard',
-    //component: DoctorDashboardComponent,
-    canActivate: [authGuard(['Doctor'])]
+    component: DoctorDashboardComponent,
+    children: [
+      { path: 'information', component: InformationComponent },
+      { path: 'appointments', component: AppointmentsComponent },
+    ],
   },
-  {
-    path: 'admin-dashboard',
-    //component: AdminDashboardComponent,
-    canActivate: [authGuard(['Admin'])]
-  },
-  {
-    path: 'unauthorized',
-   // loadComponent: () => import('./Components/Unauthorized/unauthorized.component').then(m => m.UnauthorizedComponent)
-  }
-];*/
+  
+];
+
+
+@NgModule({
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
+})
+export class AppRoutingModule {}
+
+
+
+

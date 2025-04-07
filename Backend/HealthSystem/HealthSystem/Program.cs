@@ -5,13 +5,25 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-
+using Bugsnag.AspNet.Core;
+using Microsoft.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+	options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
+
+// Configure BugSnag
+builder.Services.AddBugsnag(configuration =>
+{
+    configuration.ApiKey = "cc8bdb23dae08cfcc5e4eb3429eced49"; 
+});
 
 // Retrieve the DB_PASSWORD from environment variables
 var dbPassword = builder.Configuration["DB_PASSWORD"];
@@ -21,18 +33,34 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 
 // Configure DbContext with MySQL
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
+	options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 // CORS Configuration
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAngularApp", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200") // The URL of your Angular app
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
+	options.AddPolicy("AllowAngularApp", policy =>
+	{
+		policy.WithOrigins("http://localhost:4200") // The URL of your Angular app
+			  .AllowAnyHeader()
+			  .AllowAnyMethod();
+	});
 });
+
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.TokenValidationParameters = new TokenValidationParameters
+		{
+			ValidateIssuer = true,
+			ValidateAudience = true,
+			ValidateLifetime = true,
+			ValidateIssuerSigningKey = true,
+			ValidIssuer = builder.Configuration["Jwt:Issuer"],
+			ValidAudience = builder.Configuration["Jwt:Audience"],
+			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
+		};
+	});
 
 builder.Services.AddSwaggerGen();
 
@@ -55,9 +83,10 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+	app.UseSwagger();
+	app.UseSwaggerUI();
 }
+
 //else
 //{
 //    app.UseExceptionHandler("/Home/Error");
@@ -71,15 +100,28 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();
 
+// Add BugSnag Middleware to handle unhandled exceptions
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next.Invoke();
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred");
 
-app.UseAuthentication(); // Authentication middleware
+       
+        throw;
+    }
+});
 app.UseAuthorization();
 
-// Map controllers (API endpoints)
-
 app.MapControllerRoute(
-   name: "default",
-   pattern: "{controller=Home}/{action=Index}/{id?}");
+	name: "default",
+	pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

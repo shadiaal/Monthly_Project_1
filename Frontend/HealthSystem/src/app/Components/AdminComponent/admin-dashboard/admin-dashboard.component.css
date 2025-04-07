@@ -1,0 +1,23 @@
+.dashboard-container {
+    padding: 20px;
+}
+
+.card {
+    border-radius: 10px;
+}
+
+.card-title {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+
+    .card {
+        margin-bottom: 20px;
+    }
+}

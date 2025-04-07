@@ -17,7 +17,6 @@ namespace HealthSystem.Data
         {
             // Create GUIDs for users
             var user1ID = Guid.NewGuid();
-
             var doctor1ID = Guid.NewGuid();
             var doctor2ID = Guid.NewGuid();
             var doctor3ID = Guid.NewGuid();

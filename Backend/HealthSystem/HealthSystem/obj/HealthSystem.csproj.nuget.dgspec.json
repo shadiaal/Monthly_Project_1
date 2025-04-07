@@ -70,7 +70,7 @@
               "target": "Package",
               "version": "[8.0.0, )"
             },
-            "Swashbuckle.AspNetCore.Swagger": {
+            "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
               "version": "[8.0.0, )"
             },

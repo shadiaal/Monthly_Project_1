@@ -808,8 +808,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "l2av4jpuoj",
-      "Integrity": "vQTf4d3WJi9vmWQNA4kJnjoedgEhMFXFDEMXqtHtgzk=",
+      "Fingerprint": "f6zq8v6eb3",
+      "Integrity": "l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js"
@@ -850,8 +850,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "25iw1kog22",
-      "Integrity": "KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=",
+      "Fingerprint": "89qbw8ngem",
+      "Integrity": "rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
@@ -892,8 +892,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "m39kt2b5c9",
-      "Integrity": "EuDXUJYKnfZuO8dSLN0f5iVbVasz36AROuAU3NJ3JBo=",
+      "Fingerprint": "n5w6o92d9r",
+      "Integrity": "SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js"
@@ -934,8 +934,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "um2aeqy4ik",
-      "Integrity": "Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=",
+      "Fingerprint": "jqwzsa9uv6",
+      "Integrity": "hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js"
@@ -976,8 +976,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "o4kw7cc6tf",
-      "Integrity": "6IStRQerBchYSw6J2GWTOWGOnDRrWXmaG0r6nCwN5s4=",
+      "Fingerprint": "1piudyfv7h",
+      "Integrity": "JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.js"
@@ -1018,8 +1018,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "zwph15dxgs",
-      "Integrity": "c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=",
+      "Fingerprint": "4908xmbfjr",
+      "Integrity": "uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/lib/bootstrap/dist/js/bootstrap.min.js"
@@ -2241,10 +2241,18 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "6l4ir0ityv"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+        },
         {
           "Name": "integrity",
           "Value": "sha256-NDSZjIiMPRIoO7/w7+jHef8retP4riQa8PMj4BVRGok="
@@ -2266,7 +2274,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/plain"
+          "Value": "text/css"
         },
         {
           "Name": "ETag",
@@ -2278,7 +2286,7 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2324,6 +2332,7 @@
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2356,7 +2365,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/plain"
         },
         {
           "Name": "ETag",
@@ -2368,7 +2377,7 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2413,7 +2422,7 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -2446,7 +2455,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/plain"
         },
         {
           "Name": "ETag",
@@ -2496,6 +2505,7 @@
         {
           "Name": "Cache-Control",
           "Value": "max-age=31536000, immutable"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
@@ -2528,7 +2538,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/plain"
+          "Value": "text/css"
         },
         {
           "Name": "ETag",
@@ -2905,10 +2915,18 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "e6q6xbwqzk"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+        },
         {
           "Name": "integrity",
           "Value": "sha256-a5KlgysZ4fQXw4rzIvXDHErFDPeHRSLccP7kX6HuvSQ="
@@ -2930,7 +2948,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/plain"
+          "Value": "text/css"
         },
         {
           "Name": "ETag",
@@ -2979,7 +2997,7 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
@@ -3012,7 +3030,7 @@
         },
         {
           "Name": "Content-Type",
-          "Value": "text/css"
+          "Value": "text/plain"
         },
         {
           "Name": "ETag",
@@ -4365,7 +4383,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "208492"
+          "Value": "153194"
         },
         {
           "Name": "Content-Type",
@@ -4373,7 +4391,97 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"vQTf4d3WJi9vmWQNA4kJnjoedgEhMFXFDEMXqtHtgzk=\""
+          "Value": "\"JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "1piudyfv7h"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/js/bootstrap.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "215272"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f6zq8v6eb3"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/js/bootstrap.bundle.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "215272"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo=\""
         },
         {
           "Name": "Last-Modified",
@@ -4387,13 +4495,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-vQTf4d3WJi9vmWQNA4kJnjoedgEhMFXFDEMXqtHtgzk="
+          "Value": "sha256-l/hyCcHXdGwW6cO0xfobuAMZk3Nh8dsRdWwdaeSn9qo="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.kbynt5jhd9.map",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.l2av4jpuoj.js",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4437,8 +4545,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.js.map",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4459,7 +4567,11 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
+<<<<<<< HEAD
+          "Value": "Wed, 26 Mar 2025 23:09:03 GMT"
+=======
+          "Value": "Thu, 27 Mar 2025 11:13:21 GMT"
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         },
         {
           "Name": "Cache-Control",
@@ -4474,8 +4586,12 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.l2av4jpuoj.js",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.89qbw8ngem.js",
+<<<<<<< HEAD
+      "AssetFile": "C:\\Users\\soosh\\Desktop\\Elm-Training Program\\MonthlyProject\\HealthSystem_Project1(2)\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+=======
+      "AssetFile": "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+>>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -4484,7 +4600,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "208492"
+          "Value": "78474"
         },
         {
           "Name": "Content-Type",
@@ -4492,7 +4608,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"vQTf4d3WJi9vmWQNA4kJnjoedgEhMFXFDEMXqtHtgzk=\""
+          "Value": "\"rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=\""
         },
         {
           "Name": "Last-Modified",
@@ -4506,52 +4622,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "l2av4jpuoj"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.bundle.js"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-vQTf4d3WJi9vmWQNA4kJnjoedgEhMFXFDEMXqtHtgzk="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/dist/js/bootstrap.bundle.min.25iw1kog22.js",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "78468"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "25iw1kog22"
+          "Value": "89qbw8ngem"
         },
         {
           "Name": "label",
@@ -4559,7 +4630,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M="
+          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
         }
       ]
     },
@@ -4574,7 +4645,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "78468"
+          "Value": "78474"
         },
         {
           "Name": "Content-Type",
@@ -4582,7 +4653,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M=\""
+          "Value": "\"rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM=\""
         },
         {
           "Name": "Last-Modified",
@@ -4596,7 +4667,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-KuvCVS19rfTjoLgMyDDCdOkRRlhNrY4psEM4uezts2M="
+          "Value": "sha256-rAnWnVnzChxAAi8NS+Ilr1mE7Sj+do+X/DqyilNsznM="
         }
       ]
     },
@@ -4693,7 +4764,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "139019"
+          "Value": "143996"
         },
         {
           "Name": "Content-Type",
@@ -4701,7 +4772,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EuDXUJYKnfZuO8dSLN0f5iVbVasz36AROuAU3NJ3JBo=\""
+          "Value": "\"SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=\""
         },
         {
           "Name": "Last-Modified",
@@ -4715,7 +4786,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-EuDXUJYKnfZuO8dSLN0f5iVbVasz36AROuAU3NJ3JBo="
+          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
         }
       ]
     },
@@ -4812,7 +4883,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "139019"
+          "Value": "72022"
         },
         {
           "Name": "Content-Type",
@@ -4820,7 +4891,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"EuDXUJYKnfZuO8dSLN0f5iVbVasz36AROuAU3NJ3JBo=\""
+          "Value": "\"hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=\""
         },
         {
           "Name": "Last-Modified",
@@ -4834,15 +4905,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "m39kt2b5c9"
+          "Value": "jqwzsa9uv6"
         },
         {
           "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.esm.js"
+          "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-EuDXUJYKnfZuO8dSLN0f5iVbVasz36AROuAU3NJ3JBo="
+          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
         }
       ]
     },
@@ -4857,7 +4928,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "72016"
+          "Value": "72022"
         },
         {
           "Name": "Content-Type",
@@ -4865,7 +4936,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=\""
+          "Value": "\"hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU=\""
         },
         {
           "Name": "Last-Modified",
@@ -4879,7 +4950,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE="
+          "Value": "sha256-hVv0IJy8sIv1uIlVQOHnZFNAGprmLfDV+x0anYPmxYU="
         }
       ]
     },
@@ -4976,7 +5047,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "72016"
+          "Value": "143996"
         },
         {
           "Name": "Content-Type",
@@ -4984,7 +5055,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE=\""
+          "Value": "\"SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA=\""
         },
         {
           "Name": "Last-Modified",
@@ -4998,15 +5069,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "um2aeqy4ik"
+          "Value": "n5w6o92d9r"
         },
         {
           "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.esm.min.js"
+          "Value": "lib/bootstrap/dist/js/bootstrap.esm.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-Kj4irQWPwfSb5NFeos/h0IroI5/nIg0HtAjQ+w4v6TE="
+          "Value": "sha256-SySIctW5IQsq8JoYGrNJU4ZilHaieJru5P0+8vTcfDA="
         }
       ]
     },
@@ -5021,7 +5092,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "148168"
+          "Value": "153194"
         },
         {
           "Name": "Content-Type",
@@ -5029,7 +5100,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"6IStRQerBchYSw6J2GWTOWGOnDRrWXmaG0r6nCwN5s4=\""
+          "Value": "\"JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w=\""
         },
         {
           "Name": "Last-Modified",
@@ -5043,7 +5114,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-6IStRQerBchYSw6J2GWTOWGOnDRrWXmaG0r6nCwN5s4="
+          "Value": "sha256-JV8zLOxqX3ENLwiQX8lCiDY3TvQzbeibDAsdYtalZ4w="
         }
       ]
     },
@@ -5140,7 +5211,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "59511"
+          "Value": "59517"
         },
         {
           "Name": "Content-Type",
@@ -5148,7 +5219,52 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=\""
+          "Value": "\"uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "4908xmbfjr"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/bootstrap/dist/js/bootstrap.min.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
+        }
+      ]
+    },
+    {
+      "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "59517"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU=\""
         },
         {
           "Name": "Last-Modified",
@@ -5162,12 +5278,12 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM="
+          "Value": "sha256-uAMYHAQlaHq1buKLwrk7FF4qxvcLWntS2/DpdKucfmU="
         }
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
       "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
       "Selectors": [],
       "ResponseHeaders": [
@@ -5204,8 +5320,8 @@
       ]
     },
     {
-      "Route": "lib/bootstrap/dist/js/bootstrap.min.js.u33ctipx7g.map",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
+      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -5241,51 +5357,6 @@
         {
           "Name": "label",
           "Value": "lib/bootstrap/dist/js/bootstrap.min.js.map"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-ui/FQI+y0IUsY8Pbi80b8s3GeEL+PsvdaLTONobpn88="
-        }
-      ]
-    },
-    {
-      "Route": "lib/bootstrap/dist/js/bootstrap.min.zwph15dxgs.js",
-      "AssetFile": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "59511"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "text/javascript"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"c4Ll6eSIg6Eothk8pCWAF8aE923EvtU11pqjBy+NjNM=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Mon, 31 Mar 2025 19:16:17 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "zwph15dxgs"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/bootstrap/dist/js/bootstrap.min.js"
         },
         {
           "Name": "integrity",
@@ -5841,7 +5912,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51171"
+          "Value": "52831"
         },
         {
           "Name": "Content-Type",
@@ -5849,7 +5920,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"m0l81WDPiG7CcG7CDsTuZzvcGvyFmrQY5DLIxx3aRGw=\""
+          "Value": "\"5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg=\""
         },
         {
           "Name": "Last-Modified",
@@ -5857,13 +5928,21 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "no-cache"
+          "Value": "max-age=31536000, immutable"
         }
       ],
       "EndpointProperties": [
         {
+          "Name": "fingerprint",
+          "Value": "6d0lkjaslc"
+        },
+        {
+          "Name": "label",
+          "Value": "lib/jquery-validation/dist/jquery.validate.js"
+        },
+        {
           "Name": "integrity",
-          "Value": "sha256-m0l81WDPiG7CcG7CDsTuZzvcGvyFmrQY5DLIxx3aRGw="
+          "Value": "sha256-5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg="
         }
       ]
     },
@@ -5878,7 +5957,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24601"
+          "Value": "52831"
         },
         {
           "Name": "Content-Type",
@@ -5886,7 +5965,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JwUksNJ6/R07ZiLRoXbGeNrtlFZMFDKX4hemPiHOmCA=\""
+          "Value": "\"5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg=\""
         },
         {
           "Name": "Last-Modified",
@@ -5894,21 +5973,13 @@
         },
         {
           "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
+          "Value": "no-cache"
         }
       ],
       "EndpointProperties": [
         {
-          "Name": "fingerprint",
-          "Value": "b7iojwaux1"
-        },
-        {
-          "Name": "label",
-          "Value": "lib/jquery-validation/dist/jquery.validate.min.js"
-        },
-        {
           "Name": "integrity",
-          "Value": "sha256-JwUksNJ6/R07ZiLRoXbGeNrtlFZMFDKX4hemPiHOmCA="
+          "Value": "sha256-5qqb5VxQ2t2a6Zx/neW5uppLLvaGn4nn0NdYp6g8Lyg="
         }
       ]
     },
@@ -5923,7 +5994,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "24601"
+          "Value": "24604"
         },
         {
           "Name": "Content-Type",
@@ -5931,7 +6002,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"JwUksNJ6/R07ZiLRoXbGeNrtlFZMFDKX4hemPiHOmCA=\""
+          "Value": "\"6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w=\""
         },
         {
           "Name": "Last-Modified",
@@ -5945,7 +6016,7 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-JwUksNJ6/R07ZiLRoXbGeNrtlFZMFDKX4hemPiHOmCA="
+          "Value": "sha256-6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w="
         }
       ]
     },
@@ -5960,7 +6031,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "51171"
+          "Value": "24604"
         },
         {
           "Name": "Content-Type",
@@ -5968,7 +6039,7 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"m0l81WDPiG7CcG7CDsTuZzvcGvyFmrQY5DLIxx3aRGw=\""
+          "Value": "\"6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w=\""
         },
         {
           "Name": "Last-Modified",
@@ -5982,15 +6053,15 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "pzqfkb6aqo"
+          "Value": "l1zq2mitth"
         },
         {
           "Name": "label",
-          "Value": "lib/jquery-validation/dist/jquery.validate.js"
+          "Value": "lib/jquery-validation/dist/jquery.validate.min.js"
         },
         {
           "Name": "integrity",
-          "Value": "sha256-m0l81WDPiG7CcG7CDsTuZzvcGvyFmrQY5DLIxx3aRGw="
+          "Value": "sha256-6e0N+WJiVKBeTitK1GKSwPi3rbdPpLtuqaiitZjeD2w="
         }
       ]
     },
