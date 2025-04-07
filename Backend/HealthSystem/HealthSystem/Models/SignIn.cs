@@ -1,4 +1,4 @@
-﻿namespace HealthSystem.Models
+namespace HealthSystem.Models
 {
 	public class SignIn
 	{

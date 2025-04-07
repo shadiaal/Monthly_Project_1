@@ -1,31 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj": {}
+    "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/HealthSystem.csproj": {}
   },
   "projects": {
-    "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj": {
+    "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/HealthSystem.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj",
+        "projectUniqueName": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/HealthSystem.csproj",
         "projectName": "HealthSystem",
-        "projectPath": "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\HealthSystem.csproj",
-        "packagesPath": "C:\\Users\\rzonh\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\rzonh\\MP1\\Monthly_Project_1\\Backend\\HealthSystem\\HealthSystem\\obj\\",
+        "projectPath": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/HealthSystem.csproj",
+        "packagesPath": "/Users/rehamalsaedi/.nuget/packages/",
+        "outputPath": "/Users/rehamalsaedi/Monthly_Project_1/Backend/HealthSystem/HealthSystem/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\rzonh\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/rehamalsaedi/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -54,21 +48,9 @@
               "target": "Package",
               "version": "[4.0.3, )"
             },
-            "BugSnag": {
-              "target": "Package",
-              "version": "[4.0.0, )"
-            },
-            "Bugsnag.AspNet.Core": {
-              "target": "Package",
-              "version": "[4.0.0, )"
-            },
-            "EPPlus": {
-              "target": "Package",
-              "version": "[7.7.0, )"
-            },
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
               "target": "Package",
-              "version": "[8.0.14, )"
+              "version": "[8.0.0, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
@@ -90,6 +72,18 @@
             },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerGen": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "Swashbuckle.AspNetCore.SwaggerUI": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
               "version": "[8.7.0, )"
             }
           },
@@ -104,6 +98,20 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.osx-arm64",
+              "version": "[8.0.13, 8.0.13]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[8.0.13, 8.0.13]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -112,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
