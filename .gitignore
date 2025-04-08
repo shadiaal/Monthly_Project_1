@@ -2,8 +2,8 @@
 secrets.json
 
 # Ignore build results
-/bin/
-/obj/
+**/bin/
+**/obj/
 
 # User-specific files
 *.user
