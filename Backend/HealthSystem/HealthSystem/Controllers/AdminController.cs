@@ -481,54 +481,54 @@ namespace HealthSystem.Controllers
 
     // Request model for patient creation
     public class PatientCreateRequest
-{
-    public UserRequest user { get; set; }
-    public string nationalID { get; set; }
-    public string dateOfBirth { get; set; }
-    public string gender { get; set; }
-    public string bloodType { get; set; }
-    public string allergies { get; set; }
-    public string chronicDiseases { get; set; }
-}
+    {
+        public UserRequest user { get; set; }
+        public string nationalID { get; set; }
+        public string dateOfBirth { get; set; }
+        public string gender { get; set; }
+        public string bloodType { get; set; }
+        public string allergies { get; set; }
+        public string chronicDiseases { get; set; }
+    }
 
-public class UserRequest
-{
-    public string firstName { get; set; }
-    public string middleName { get; set; }
-    public string lastName { get; set; }
-    public string email { get; set; }
-    public string phoneNumber { get; set; }
-    public string password { get; set; }
-}
-// Define the CreateDoctorRequest class to match input structure for creating new doctor
-public class CreateDoctorRequest
-{
-    public string FirstName { get; set; }
-    public string MiddleName { get; set; }
-    public string LastName { get; set; }
-    public string Email { get; set; }
-    public string PhoneNumber { get; set; }
-    public string Password { get; set; }
-    public string Gender { get; set; }
-    public string Specialization { get; set; }
-    public string Clinic { get; set; }
-    public List<WorkingHoursRequest> WorkingHours { get; set; }
-}
+    public class UserRequest
+    {
+        public string firstName { get; set; }
+        public string middleName { get; set; }
+        public string lastName { get; set; }
+        public string email { get; set; }
+        public string phoneNumber { get; set; }
+        public string password { get; set; }
+    }
+    // Define the CreateDoctorRequest class to match input structure for creating new doctor
+    public class CreateDoctorRequest
+    {
+        public string FirstName { get; set; }
+        public string MiddleName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Password { get; set; }
+        public string Gender { get; set; }
+        public string Specialization { get; set; }
+        public string Clinic { get; set; }
+        public List<WorkingHoursRequest> WorkingHours { get; set; }
+    }
 
-// Define the WorkingHoursRequest class for working hours input 
-public class WorkingHoursRequest
-{
-    public string Day { get; set; }
-    public string StartTime { get; set; }
-    public string EndTime { get; set; }
-}
+    // Define the WorkingHoursRequest class for working hours input 
+    public class WorkingHoursRequest
+    {
+        public string Day { get; set; }
+        public string StartTime { get; set; }
+        public string EndTime { get; set; }
+    }
 
-// Define the CreateAppointmentRequest class to match input structure for creating new appointment
-public class CreateAppointmentRequest
-{
-    public Guid PatientID { get; set; }
-    public Guid DoctorID { get; set; }
-    public DateTime AppointmentDate { get; set; }
-    public string AppointmentTime { get; set; }
-}
+    // Define the CreateAppointmentRequest class to match input structure for creating new appointment
+    public class CreateAppointmentRequest
+    {
+        public Guid PatientID { get; set; }
+        public Guid DoctorID { get; set; }
+        public DateTime AppointmentDate { get; set; }
+        public string AppointmentTime { get; set; }
+    }
 }

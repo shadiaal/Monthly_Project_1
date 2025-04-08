@@ -1,8 +1,6 @@
 [
   {
     "ContainingType": "HealthSystem.Controllers.AdminController",
-<<<<<<< HEAD
-=======
     "Method": "CreateAppointment",
     "RelativePath": "api/admin/appointments/create",
     "HttpMethod": "POST",
@@ -19,7 +17,6 @@
   },
   {
     "ContainingType": "HealthSystem.Controllers.AdminController",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "Method": "CreateDoctor",
     "RelativePath": "api/admin/create-doctor",
     "HttpMethod": "POST",
@@ -35,38 +32,22 @@
     "ReturnTypes": []
   },
   {
-<<<<<<< HEAD
-    "ContainingType": "HealthSystem.Controllers.AuthController",
-    "Method": "SignIn",
-    "RelativePath": "api/Auth/signin",
-=======
     "ContainingType": "HealthSystem.Controllers.AdminController",
     "Method": "CreatePatient",
     "RelativePath": "api/admin/create-patient",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-<<<<<<< HEAD
-        "Name": "signInRequest",
-        "Type": "HealthSystem.Models.SignIn",
-=======
         "Name": "request",
         "Type": "HealthSystem.Controllers.PatientCreateRequest",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-<<<<<<< HEAD
-    "ContainingType": "HealthSystem.Controllers.DoctorController",
-    "Method": "GetDoctor",
-    "RelativePath": "api/Doctor/{id}",
-=======
     "ContainingType": "HealthSystem.Controllers.AdminController",
     "Method": "GetDoctors",
     "RelativePath": "api/admin/doctors",
@@ -80,22 +61,89 @@
     "ContainingType": "HealthSystem.Controllers.AdminController",
     "Method": "DownloadDoctorExcel",
     "RelativePath": "api/admin/download-excel/{doctorId}",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-<<<<<<< HEAD
-        "Name": "id",
-=======
         "Name": "doctorId",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "Type": "System.Guid",
         "IsRequired": true
       }
     ],
-<<<<<<< HEAD
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "GetAvailableAppointments",
+    "RelativePath": "api/admin/getAllAvailablAappointments",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "date",
+        "Type": "System.DateTime",
+        "IsRequired": false
+      },
+      {
+        "Name": "clinic",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "Barchart",
+    "RelativePath": "api/admin/graph/barChart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "Piechart",
+    "RelativePath": "api/admin/graph/piechart",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.AuthController",
+    "Method": "SignIn",
+    "RelativePath": "api/Auth/signin",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "signInRequest",
+        "Type": "HealthSystem.Models.SignIn",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.DoctorController",
+    "Method": "GetDoctor",
+    "RelativePath": "api/Doctor/{id}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
         "Type": "HealthSystem.Models.Doctor",
@@ -112,20 +160,11 @@
     "ContainingType": "HealthSystem.Controllers.DoctorController",
     "Method": "GetAppointmentsByDoctor",
     "RelativePath": "api/Doctor/{id}/appointments",
-=======
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthSystem.Controllers.AdminController",
-    "Method": "GetAvailableAppointments",
-    "RelativePath": "api/admin/getAllAvailablAappointments",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-<<<<<<< HEAD
         "Name": "id",
         "Type": "System.Guid",
         "IsRequired": true
@@ -163,38 +202,5 @@
       }
     ],
     "ReturnTypes": []
-=======
-        "Name": "date",
-        "Type": "System.DateTime",
-        "IsRequired": false
-      },
-      {
-        "Name": "clinic",
-        "Type": "System.String",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthSystem.Controllers.AdminController",
-    "Method": "Barchart",
-    "RelativePath": "api/admin/graph/barChart",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "HealthSystem.Controllers.AdminController",
-    "Method": "Piechart",
-    "RelativePath": "api/admin/graph/piechart",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
   }
 ]
