@@ -16,5 +16,9 @@ export class AdminComponent {
     private router: Router
   ) { }
 
-
+ // Navigate to Login Page
+ showLogin() {
+  localStorage.removeItem('userID');
+  this.router.navigate(['/signin']);
+}
 }

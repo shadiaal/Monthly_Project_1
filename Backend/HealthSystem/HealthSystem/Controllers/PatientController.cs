@@ -60,7 +60,7 @@ namespace HealthSystem.Controllers
         }
 
         // 2. GET all patient's appointments by UserID
-
+        [Authorize(Roles = "Patient")]
         [HttpGet("getAppointments/{userId}")]
         public async Task<IActionResult> GetAppointments(Guid userId)
         {

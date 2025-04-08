@@ -13,16 +13,20 @@ import { AdminDashboardComponent } from './Components/AdminComponent/admin-dashb
 import { CreateDoctorComponent } from './Components/AdminComponent/create-doctor/create-doctor.component';
 import { DoctorListComponent } from './Components/AdminComponent/doctor-list/doctor-list.component';
 import { AppointmentCreateComponent } from './Components/AdminComponent/appointment-create/appointment-create.component';
+import { PatientDashboardComponent } from './Components/PatientComponent/patient-dashboard/patient-dashboard.component';
 export const routes: Routes = [
   {
     path: 'admin',
     component: AdminComponent, // يحتوي على sidebar
     children: [
-        { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-        { path: 'dashboard', component: AdminDashboardComponent },
-        { path: 'createPatient', component: CreatePatientComponent },
+      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
+      { path: 'dashboard', component: AdminDashboardComponent },
+      { path: 'createPatient', component: CreatePatientComponent },
+      { path: 'create-doctor', component: CreateDoctorComponent },
+      { path: 'doctor-list', component: DoctorListComponent },
+      { path: 'appointments/create', component: AppointmentCreateComponent },
     ],
-},
+  },
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: SigninComponent },
   {
@@ -33,7 +37,13 @@ export const routes: Routes = [
       { path: 'appointments', component: AppointmentsComponent },
     ],
   },
-  
+  {
+    path: 'patient-dashboard',
+    component: PatientDashboardComponent,
+
+  }
+
+
 ];
 
 
@@ -41,7 +51,7 @@ export const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 
 
 

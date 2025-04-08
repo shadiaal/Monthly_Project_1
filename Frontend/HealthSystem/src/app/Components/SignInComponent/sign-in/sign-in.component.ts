@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { SignInService } from '../../../Services/SignInServices/sign-in.service';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; 
+import { HttpClientModule } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
@@ -18,7 +18,7 @@ export class SigninComponent {
   password: string = '';
   errorMessage: string = '';
 
-  constructor(private signInService: SignInService, private router: Router) {}
+  constructor(private signInService: SignInService, private router: Router) { }
 
   signIn(): void {
     if (!this.userID || !this.password) {
@@ -32,12 +32,12 @@ export class SigninComponent {
         this.signInService.storeToken(response.token);
         localStorage.setItem('token', response.token); // Add this line
 
-        
+
 
         // Store the userId in localStorage after successful login
         localStorage.setItem('userID', this.userID); // <-- Store userId here!
         console.log('User ID stored:', this.userID);
-        
+
 
         // Redirect based on user role
         this.redirectUser(response.role);
@@ -53,7 +53,7 @@ export class SigninComponent {
     // Redirect user based on their role (Admin, Doctor, Patient)
     switch (role) {
       case 'Admin':
-        this.router.navigate(['/admin-dashboard']);
+        this.router.navigate(['/admin']);
         break;
       case 'Doctor':
         this.router.navigate(['/doctor-dashboard']);

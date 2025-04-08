@@ -34,6 +34,7 @@ namespace HealthSystem.Controllers
 
         // ------- Admin & statistics -------
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("graph/barChart")]
         public async Task<IActionResult> Barchart()
         {
@@ -49,7 +50,7 @@ namespace HealthSystem.Controllers
             return Ok(BarchartData);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("graph/piechart")]
         public async Task<IActionResult> Piechart()
         {
@@ -68,7 +69,7 @@ namespace HealthSystem.Controllers
 
 
         // ------- Admin & Patient -------
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-patient")]
         public async Task<IActionResult> CreatePatient([FromBody] PatientCreateRequest request)
         {
@@ -166,6 +167,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Create new Doctor API  *****
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-doctor")]
         public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorRequest request)
         {
@@ -230,6 +232,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Get All Doctors API  *****
+        [Authorize(Roles = "Admin")]
         [HttpGet("doctors")]
         public async Task<IActionResult> GetDoctors()
         {
@@ -285,6 +288,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Create new Appointment API  *****
+        [Authorize(Roles = "Admin")]
         [HttpPost("appointments/create")]
         public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentRequest request)
         {
@@ -335,6 +339,7 @@ namespace HealthSystem.Controllers
 
         // ****  Get download Excel file contain doctor information API  *****
         // GET: /api/admin/download-excel/{doctorId}
+        [Authorize(Roles = "Admin")]
         [HttpGet("download-excel/{doctorId}")]
         public async Task<IActionResult> DownloadDoctorExcel(Guid doctorId)
         {
@@ -386,6 +391,7 @@ namespace HealthSystem.Controllers
         }
 
         // ****  Get Availabel appointments API  *****
+        [Authorize(Roles = "Admin")]
         [HttpGet("getAllAvailablAappointments")]
         public async Task<IActionResult> GetAvailableAppointments(DateTime date, ClinicType clinic)
         {

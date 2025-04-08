@@ -29,14 +29,28 @@ getDoctorData(userID: string): Observable<any> {
     
 
 getAppointments(userID: string): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}/${userID}/appointments`).pipe(
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Token not found');
+  }
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this.http.get<any>(`${this.apiUrl}/${userID}/appointments`,{ headers }).pipe(
     tap((data) => console.log('Appointments:', data))
   );
 }
 
  updateNote(appointmentId: number, note: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Token not found');
+  }
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
     const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
-    return this.http.put(url, { note });
+    return this.http.put(url, { note }, { headers });
 
 
 }

@@ -1,5 +1,6 @@
 ﻿using HealthSystem.Data;
 using HealthSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace HealthSystem.Controllers
 			_context = context;
 		}
 
-	
-		[HttpGet("{id}")]
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("{id}")]
 		public async Task<ActionResult<Doctor>> GetDoctor(Guid id)
 		{
 			var doctor = await _context.Doctors
@@ -37,9 +38,9 @@ namespace HealthSystem.Controllers
 		}
 
 
-	
 
-		[HttpGet("{id}/appointments")]
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("{id}/appointments")]
 		public async Task<ActionResult<List<Appointment>>> GetAppointmentsByDoctor(Guid id)
 		{
 			var appointments = await _context.Appointments
@@ -58,8 +59,9 @@ namespace HealthSystem.Controllers
 
 
 
-		// PUT: /api/doctor/appointments/{appointmentId}/notes
-		[HttpPut("appointments/{appointmentId}/notes")]
+        // PUT: /api/doctor/appointments/{appointmentId}/notes
+        [Authorize(Roles = "Doctor")]
+        [HttpPut("appointments/{appointmentId}/notes")]
 		public async Task<IActionResult> AddNoteToAppointment(int appointmentId, [FromBody] string note)
 		{
 			if (string.IsNullOrWhiteSpace(note))

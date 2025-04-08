@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { PatientService } from '../../../Services/PatientServices/patient.service';
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http'; 
-import { FormsModule } from '@angular/forms'; 
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-patient-appointments',
@@ -15,27 +15,31 @@ export class PatientAppointmentsComponent implements OnInit {
   @Input() userID!: string;
   appointments: any[] = [];
 
-  constructor(private PatientService: PatientService) {}
+  constructor(private PatientService: PatientService) { }
 
   ngOnInit(): void {
-    this.PatientService.getAppointments(this.userID).subscribe(
-      (data) => {
-        this.appointments = data;
-      },
-      (error) => {
-        console.error('Error fetching appointments:', error);
-        // Optionally display an error message to the user
-      }
+    this.userID = localStorage.getItem('userID') || '';
+    if (this.userID) {
+      this.PatientService.getAppointments(this.userID).subscribe(
+        (data) => {
+          this.appointments = data?.$values || [];
+          console.log('appointments Data:', this.appointments);
+        },
+        (error) => {
+          console.error('Error fetching appointments:', error);
+        }
+      );
+    }
+
+  }
+
+
+  statusFilter: string = '';
+
+  get filteredAppointments() {
+    return this.appointments.filter(appointment =>
+      (!this.statusFilter || appointment.status === this.statusFilter)
     );
-    
-}
-
-statusFilter: string = '';
-
-get filteredAppointments() {
-  return this.appointments.filter(appointment =>
-    (!this.statusFilter || appointment.status === this.statusFilter)
-  );
-}
+  }
 
 }

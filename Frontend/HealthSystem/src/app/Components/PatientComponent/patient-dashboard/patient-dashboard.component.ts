@@ -5,6 +5,7 @@ import { PatientAppointmentsComponent } from '../patient-appointments/patient-ap
 import { SignInService } from '../../../Services/SignInServices/sign-in.service';
 import { HttpClientModule } from '@angular/common/http';
 import { PatientService } from '../../../Services/PatientServices/patient.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -20,7 +21,8 @@ export class PatientDashboardComponent implements OnInit {
 
   constructor(
     private signInService: SignInService,
-    private patientService: PatientService
+    private patientService: PatientService,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -55,11 +57,10 @@ export class PatientDashboardComponent implements OnInit {
     this.activeTab = 'appointments';
   }
 
-  navigateToSignIn(): void {
-    console.log('Signing out...');
+  // Navigate to Login Page
+  showLogin() {
     localStorage.removeItem('userID');
-    localStorage.removeItem('token');
-  
+    this.router.navigate(['/signin']);
   }
 }
 

@@ -9,6 +9,7 @@
       "HealthSystem/1.0.0": {
         "dependencies": {
           "BCrypt.Net-Next": "4.0.3",
+          "Bugsnag": "4.0.0",
           "Bugsnag.AspNet.Core": "4.0.0",
           "EPPlus": "7.7.0",
           "Microsoft.AspNetCore.Authentication.JwtBearer": "8.0.14",

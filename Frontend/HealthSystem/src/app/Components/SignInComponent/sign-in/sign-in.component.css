@@ -5,6 +5,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-image:url("../../../Assets/SignInBackground.png");
+  background-position: center;
+  background-repeat: none;
+  background-size: contain;
 }
 
 /* Container for form */

@@ -3,18 +3,18 @@
         <br>
         <hr>
         <li [routerLink]="['/admin/dashboard']">
-            <i class="fa-solid fa-circle-info"></i> Dashboard
+            <i class="fa-solid fa-chart-line"></i> Dashboard
         </li>
         <li [routerLink]="['/admin/createPatient']">
-            <i class="fa-solid fa-circle-info"></i> Patient
+            <i class="fa-solid fa-user-plus"></i> Patient
         </li>
-        <li [routerLink]="['/admin/doctors']">
-            <i class="fa-solid fa-circle-info"></i> Doctor
+        <li [routerLink]="['/admin/doctor-list']">
+            <i class="fa-solid fa-user-doctor"></i> Doctor
         </li>
-        <li [routerLink]="['/admin/appointments']">
-            <i class="fa-solid fa-circle-info"></i> Appointments
+        <li [routerLink]="['/admin/appointments/create']">
+            <i class="fa-solid fa-calendar-check"></i> Appointments
         </li>
-        <li> <i class="fa-solid fa-right-from-bracket"></i>Sign out</li>
+        <li (click)="showLogin()"> <i class="fa-solid fa-right-from-bracket"></i>Sign out</li>
 
     </ul>
 </div>
