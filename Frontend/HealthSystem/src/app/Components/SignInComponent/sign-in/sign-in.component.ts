@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SignInService } from '../../../Services/SignInServices/sign-in/sign-in.service';
+import { SignInService } from '../../../Services/SignInServices/sign-in.service';
 import { FormsModule } from '@angular/forms'; 
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http'; 

@@ -1,0 +1,54 @@
+<div class="main-content">
+  <h2 class="mb-3 fw-bold">Appointments</h2>
+
+  <!-- Filter Bar -->
+  <div class="d-flex gap-3 mb-3">
+
+    <!-- Status Filter -->
+    <div>
+      <label for="status" class="me-2 fw-semibold">Filter by status:</label>
+      <select id="status" class="form-select" [(ngModel)]="statusFilter" style="width: 150px;">
+        <option value="">All</option>
+        <option value="Upcoming">Upcoming</option>
+        <option value="Current">Current</option>
+        <option value="Past">Past</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Appointments Table -->
+  <div class="table-responsive bg-white shadow-sm rounded">
+    <table class="table table-striped align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Doctor</th>
+          <th>Status</th>
+          <th>Note</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let appointment of filteredAppointments">
+          <td>{{ appointment.appointmentDate | date }}</td>
+          <td>{{ appointment.appointmentTime }}</td>
+
+          <td>
+            {{ appointment.doctor?.firstName }} {{ appointment.doctor?.lastName }}
+          </td>
+
+          <td>
+            <span class="badge" [ngClass]="{
+              'bg-success': appointment.status === 'Upcoming',
+              'bg-warning text-dark': appointment.status === 'Current',
+              'bg-danger': appointment.status === 'Past'
+            }">
+              {{ appointment.status }}
+            </span>
+          </td>
+          <td>{{ appointment.note }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
