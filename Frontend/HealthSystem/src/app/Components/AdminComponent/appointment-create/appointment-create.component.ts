@@ -32,7 +32,7 @@ export class AppointmentCreateComponent {
         .getAvailableAppointments(this.date, this.clinic)
         .subscribe(
           (response) => {
-            this.availableAppointments = response.availableAppointments || [];
+            this.availableAppointments = response.availableAppointments.$values || [];
             console.log('available app object; ', this.availableAppointments);
           },
           (error) => {

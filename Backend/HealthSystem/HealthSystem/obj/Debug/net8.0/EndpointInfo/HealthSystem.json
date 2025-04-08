@@ -5,7 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-<<<<<<< HEAD
     "/api/admin/test-error": {
       "get": {
         "tags": [
@@ -18,10 +17,6 @@
         }
       }
     },
-=======
-<<<<<<< HEAD
-=======
->>>>>>> a9953e50267a82bb029f7565b80cc96486056262
     "/api/admin/graph/barChart": {
       "get": {
         "tags": [
@@ -77,7 +72,6 @@
         }
       }
     },
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
     "/api/admin/create-doctor": {
       "post": {
         "tags": [
@@ -109,12 +103,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "/api/Auth/signin": {
-      "post": {
-        "tags": [
-          "Auth"
-=======
     "/api/admin/doctors": {
       "get": {
         "tags": [
@@ -131,35 +119,22 @@
       "post": {
         "tags": [
           "Admin"
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         ],
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
-<<<<<<< HEAD
-                "$ref": "#/components/schemas/SignIn"
-=======
                 "$ref": "#/components/schemas/CreateAppointmentRequest"
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             },
             "text/json": {
               "schema": {
-<<<<<<< HEAD
-                "$ref": "#/components/schemas/SignIn"
-=======
                 "$ref": "#/components/schemas/CreateAppointmentRequest"
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             },
             "application/*+json": {
               "schema": {
-<<<<<<< HEAD
-                "$ref": "#/components/schemas/SignIn"
-=======
                 "$ref": "#/components/schemas/CreateAppointmentRequest"
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
               }
             }
           }
@@ -171,16 +146,6 @@
         }
       }
     },
-<<<<<<< HEAD
-    "/api/Doctor/{id}": {
-      "get": {
-        "tags": [
-          "Doctor"
-        ],
-        "parameters": [
-          {
-            "name": "id",
-=======
     "/api/admin/download-excel/{doctorId}": {
       "get": {
         "tags": [
@@ -189,7 +154,6 @@
         "parameters": [
           {
             "name": "doctorId",
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "in": "path",
             "required": true,
             "schema": {
@@ -200,7 +164,89 @@
         ],
         "responses": {
           "200": {
-<<<<<<< HEAD
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/admin/getAllAvailablAappointments": {
+      "get": {
+        "tags": [
+          "Admin"
+        ],
+        "parameters": [
+          {
+            "name": "date",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "clinic",
+            "in": "query",
+            "schema": {
+              "$ref": "#/components/schemas/ClinicType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Auth/signin": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignIn"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignIn"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SignIn"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Doctor/{id}": {
+      "get": {
+        "tags": [
+          "Doctor"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "OK",
             "content": {
               "text/plain": {
@@ -219,14 +265,10 @@
                 }
               }
             }
-=======
-            "description": "OK"
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
           }
         }
       }
     },
-<<<<<<< HEAD
     "/api/Doctor/{id}/appointments": {
       "get": {
         "tags": [
@@ -311,30 +353,52 @@
             }
           }
         },
-=======
-    "/api/admin/getAllAvailablAappointments": {
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/patients/getPatientData/{userId}": {
       "get": {
         "tags": [
-          "Admin"
+          "Patient"
         ],
         "parameters": [
           {
-            "name": "date",
-            "in": "query",
+            "name": "userId",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string",
-              "format": "date-time"
-            }
-          },
-          {
-            "name": "clinic",
-            "in": "query",
-            "schema": {
-              "$ref": "#/components/schemas/ClinicType"
+              "format": "uuid"
             }
           }
         ],
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/patients/getAppointments/{userId}": {
+      "get": {
+        "tags": [
+          "Patient"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -345,7 +409,6 @@
   },
   "components": {
     "schemas": {
-<<<<<<< HEAD
       "Appointment": {
         "required": [
           "appointmentDate",
@@ -417,8 +480,6 @@
         "type": "integer",
         "format": "int32"
       },
-=======
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
       "ClinicType": {
         "enum": [
           0,
@@ -435,12 +496,54 @@
         "type": "integer",
         "format": "int32"
       },
-<<<<<<< HEAD
+      "CreateAppointmentRequest": {
+        "type": "object",
+        "properties": {
+          "patientID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "doctorID": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "appointmentDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "appointmentTime": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "CreateDoctorRequest": {
         "type": "object",
         "properties": {
-          "user": {
-            "$ref": "#/components/schemas/UserDto"
+          "firstName": {
+            "type": "string",
+            "nullable": true
+          },
+          "middleName": {
+            "type": "string",
+            "nullable": true
+          },
+          "lastName": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "phoneNumber": {
+            "type": "string",
+            "nullable": true
+          },
+          "password": {
+            "type": "string",
+            "nullable": true
           },
           "gender": {
             "type": "string",
@@ -457,7 +560,7 @@
           "workingHours": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WorkingHoursDto"
+              "$ref": "#/components/schemas/WorkingHoursRequest"
             },
             "nullable": true
           }
@@ -545,72 +648,22 @@
           "allergies": {
             "maxLength": 500,
             "minLength": 0,
-=======
-      "CreateAppointmentRequest": {
-        "type": "object",
-        "properties": {
-          "patientID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "doctorID": {
-            "type": "string",
-            "format": "uuid"
-          },
-          "appointmentDate": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "appointmentTime": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "CreateDoctorRequest": {
-        "type": "object",
-        "properties": {
-          "firstName": {
             "type": "string",
             "nullable": true
           },
-          "middleName": {
+          "chronicDiseases": {
+            "maxLength": 500,
+            "minLength": 0,
             "type": "string",
             "nullable": true
           },
-          "lastName": {
-            "type": "string",
-            "nullable": true
+          "user": {
+            "$ref": "#/components/schemas/User"
           },
-          "email": {
-            "type": "string",
-            "nullable": true
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "password": {
-            "type": "string",
-            "nullable": true
-          },
-          "gender": {
-            "type": "string",
-            "nullable": true
-          },
-          "specialization": {
-            "type": "string",
-            "nullable": true
-          },
-          "clinic": {
-            "type": "string",
-            "nullable": true
-          },
-          "workingHours": {
+          "appointments": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/WorkingHoursRequest"
+              "$ref": "#/components/schemas/Appointment"
             },
             "nullable": true
           }
@@ -640,25 +693,11 @@
             "nullable": true
           },
           "allergies": {
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "type": "string",
             "nullable": true
           },
           "chronicDiseases": {
-<<<<<<< HEAD
-            "maxLength": 500,
-            "minLength": 0,
             "type": "string",
-            "nullable": true
-          },
-          "user": {
-            "$ref": "#/components/schemas/User"
-          },
-          "appointments": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Appointment"
-            },
             "nullable": true
           }
         },
@@ -672,15 +711,12 @@
             "format": "uuid"
           },
           "password": {
-=======
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
             "type": "string",
             "nullable": true
           }
         },
         "additionalProperties": false
       },
-<<<<<<< HEAD
       "User": {
         "required": [
           "email",
@@ -740,10 +776,7 @@
         },
         "additionalProperties": false
       },
-      "UserDto": {
-=======
       "UserRequest": {
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "type": "object",
         "properties": {
           "firstName": {
@@ -769,18 +802,10 @@
           "password": {
             "type": "string",
             "nullable": true
-<<<<<<< HEAD
-          },
-          "role": {
-            "type": "string",
-            "nullable": true
-=======
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
           }
         },
         "additionalProperties": false
       },
-<<<<<<< HEAD
       "UserRole": {
         "enum": [
           0,
@@ -821,10 +846,7 @@
         },
         "additionalProperties": false
       },
-      "WorkingHoursDto": {
-=======
       "WorkingHoursRequest": {
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
         "type": "object",
         "properties": {
           "day": {
@@ -841,7 +863,6 @@
           }
         },
         "additionalProperties": false
-<<<<<<< HEAD
       },
       "dayOfWeek": {
         "enum": [
@@ -855,8 +876,6 @@
         ],
         "type": "integer",
         "format": "int32"
-=======
->>>>>>> 09ef6239df41f800dca628b71aa39bc81837eba4
       }
     }
   }

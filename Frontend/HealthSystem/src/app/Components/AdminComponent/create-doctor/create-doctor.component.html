@@ -150,8 +150,8 @@
         </div>
       </div>
   
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+      <div class="text-left">
+        <button type="submit" class="btn btn-success createBtn" [disabled]="isLoading">
           <span *ngIf="isLoading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
           {{ isLoading ? 'Creating...' : 'Create Doctor' }}
         </button>

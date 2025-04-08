@@ -7,7 +7,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatCardModule } from '@angular/material/card';
-
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-doctor-list',
   standalone: true,
@@ -40,7 +40,7 @@ export class DoctorListComponent implements OnInit {
     8: 'Psychiatry',
     9: 'Gynecology'
   };
-  constructor(private adminService: AdminService) {}
+  constructor(private adminService: AdminService,private router: Router) {}
 
   ngOnInit(): void {
     this.loadDoctors();
@@ -52,7 +52,8 @@ export class DoctorListComponent implements OnInit {
     
     this.adminService.getDoctors().subscribe({
       next: (response) => {
-        this.doctors = response;
+        console.log('Doctors response:', response);
+        this.doctors = response.$values;
         this.isLoading = false;
       },
       error: (err) => {
@@ -76,7 +77,7 @@ export class DoctorListComponent implements OnInit {
     });
   }
 
-  refreshDoctors(): void {
-    this.loadDoctors();
+  navigateToCreateDoctor() {
+    this.router.navigate(['/admin/create-doctor']);
   }
 }
