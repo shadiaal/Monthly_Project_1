@@ -41,7 +41,7 @@
             <td>
               <!-- Using Bootstrap's row and col classes to align slots horizontally -->
               <div class="d-flex flex-wrap">
-                <button *ngFor="let slot of doctor.availableTimeSlots" class="btn btn-primary btn-sm m-1" (click)="openModal(doctor, slot, doctor.doctorID)">
+                <button *ngFor="let slot of doctor.availableTimeSlots.$values" class="btn btn-slot btn-sm m-1" (click)="openModal(doctor, slot, doctor.doctorID)">
                   {{ slot }}
                 </button>
               </div>
@@ -59,9 +59,9 @@
       </button>
     </div>
   
-    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert">
-      {{ errorMessage }}
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div *ngIf="errorMessage" class=" d-flex justify-content-between alert alert-danger alert-dismissible fade show" role="alert">
+     {{ errorMessage }}
+      <button type="button" class="close text-end" data-dismiss="alert" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
@@ -70,7 +70,7 @@
     <div *ngIf="showModal" class="modal fade show" tabindex="-1" style="display: block;">
       <div class="modal-dialog">
         <div class="modal-content">
-          <div class="modal-header">
+          <div class="modal-header d-flex justify-content-between">
             <h5 class="modal-title">Appointment Summary</h5>
             <button type="button" class="close" (click)="closeModal()">
               <span aria-hidden="true">&times;</span>
