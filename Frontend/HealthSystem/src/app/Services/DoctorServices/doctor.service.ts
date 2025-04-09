@@ -47,14 +47,14 @@ getAppointments(userID: string): Observable<any> {
     throw new Error('Token not found');
   }
   const headers = new HttpHeaders({
-    'Authorization': `Bearer ${token}`
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
   });
     const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
-    return this.http.put(url, { note }, { headers });
+    return this.http.put(url, JSON.stringify( note) , { headers });
 
 
 }
-
 
 
 }
