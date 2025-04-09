@@ -29,18 +29,63 @@ getDoctorData(userID: string): Observable<any> {
     
 
 getAppointments(userID: string): Observable<any> {
-  return this.http.get<any>(`${this.apiUrl}/${userID}/appointments`).pipe(
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Token not found');
+  }
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+  });
+  return this.http.get<any>(`${this.apiUrl}/${userID}/appointments`,{ headers }).pipe(
     tap((data) => console.log('Appointments:', data))
   );
 }
 
- updateNote(appointmentId: number, note: string): Observable<any> {
-    const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
-    return this.http.put(url, { note });
+//  updateNote(appointmentId: number, note: string): Observable<any> {
+//   const token = localStorage.getItem('token');
+//   if (!token) {
+//     throw new Error('Token not found');
+//   }
+//   const headers = new HttpHeaders({
+//     'Authorization': `Bearer ${token}`
+//   });
+//     const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
+//     return this.http.put(url, { note }, { headers });
 
 
+// }
+
+// updateNote(appointmentId: number, note: string): Observable<any> {
+//   const token = localStorage.getItem('token');
+//   if (!token) {
+//     throw new Error('Token not found');
+//   }
+
+//   const headers = new HttpHeaders({
+//     'Authorization': `Bearer ${token}`,
+//     'Content-Type': 'application/json'  // Ensure Content-Type is set to JSON
+//   });
+
+//   const url = `${this.apiUrl}/appointments/${appointmentId}/notes`;
+
+//   // Send the note as a plain string
+//   return this.http.put(url, note, { headers });
+// }
+updateNote(appointmentId: number, note: string): Observable<any> {
+  const token = localStorage.getItem('token');
+  if (!token) {
+    throw new Error('Token not found');
+  }
+
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`,
+    'Content-Type': 'application/json'
+  });
+
+  const url = `${this.apiUrl}/appointments/${appointmentId}/notes`;
+
+  return this.http.put(url, JSON.stringify(note), { headers }); 
 }
-
 
 
 }

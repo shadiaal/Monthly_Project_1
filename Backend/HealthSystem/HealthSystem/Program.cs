@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using Bugsnag.AspNet.Core;
+using Microsoft.Extensions.Logging;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,6 +17,12 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddControllers().AddJsonOptions(options =>
 {
 	options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
+});
+
+// Configure BugSnag
+builder.Services.AddBugsnag(configuration =>
+{
+    configuration.ApiKey = "cc8bdb23dae08cfcc5e4eb3429eced49"; 
 });
 
 // Retrieve the DB_PASSWORD from environment variables
@@ -39,6 +47,9 @@ builder.Services.AddCors(options =>
 });
 
 
+
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 	.AddJwtBearer(options =>
 	{
@@ -53,8 +64,6 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 			IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:SecretKey"]))
 		};
 	});
-
-builder.Services.AddSwaggerGen();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -69,6 +78,7 @@ if (app.Environment.IsDevelopment())
 //    app.UseExceptionHandler("/Home/Error");
 //    app.UseHsts();
 //}
+
 // Enable CORS (Cross-Origin Requests)
 app.UseCors("AllowAngularApp");
 
@@ -77,6 +87,23 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseAuthentication();
+
+// Add BugSnag Middleware to handle unhandled exceptions
+app.Use(async (context, next) =>
+{
+    try
+    {
+        await next.Invoke();
+    }
+    catch (Exception ex)
+    {
+        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "An error occurred");
+
+       
+        throw;
+    }
+});
 app.UseAuthorization();
 
 app.MapControllerRoute(

@@ -1,0 +1,45 @@
+<div *ngIf="patientData" class="container">
+  <h2>General Information</h2>
+  <hr>
+  <div class="grid">
+    <div class="info-box">
+      <p>First Name</p>
+      <span>{{ patientData.user.firstName }}</span>
+    </div>
+    <div class="info-box">
+      <p>Last Name</p>
+      <span>{{ patientData.user.lastName }}</span>
+    </div>
+    <div class="info-box">
+      <p>Email</p>
+      <span>{{ patientData.user.email }}</span>
+    </div>
+    <div class="info-box">
+      <p>Phone</p>
+      <span>{{ patientData.user.phoneNumber }}</span>
+    </div>
+    <div class="info-box">
+      <p>Gender</p>
+      <span>{{ patientData.patient.gender === 0 ? 'Male' : 'Female' }}</span>
+    </div>
+    <div class="info-box">
+      <p>Age</p>
+      <span>{{ patientData.patient.age }}</span>
+    </div>
+    <div class="info-box">
+      <p>Blood Type</p>
+      <span>{{ patientData.patient.bloodType }}</span>
+    </div>
+    <div class="info-box">
+      <p>Allergies</p>
+      <span>{{ patientData.patient.allergies }}</span>
+    </div>
+    <div class="info-box">
+      <p>Chronic Diseases</p>
+      <span>{{ patientData.patient.chronicDiseases }}</span>
+    </div>
+  </div>
+</div>
+
+
+  

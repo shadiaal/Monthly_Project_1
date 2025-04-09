@@ -28,6 +28,39 @@
           }
         }
       },
+      "Bugsnag/4.0.0": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Bugsnag.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Bugsnag.dll": {
+            "related": ".xml"
+          }
+        }
+      },
+      "Bugsnag.AspNet.Core/4.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Bugsnag": "4.0.0",
+          "Microsoft.Extensions.DiagnosticAdapter": "3.1.32"
+        },
+        "compile": {
+          "lib/net6.0/Bugsnag.AspNet.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/Bugsnag.AspNet.Core.dll": {
+            "related": ".xml"
+          }
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "EPPlus/7.7.0": {
         "type": "package",
         "dependencies": {
@@ -721,6 +754,22 @@
         },
         "build": {
           "buildTransitive/net6.0/_._": {}
+        }
+      },
+      "Microsoft.Extensions.DiagnosticAdapter/3.1.32": {
+        "type": "package",
+        "dependencies": {
+          "System.Diagnostics.DiagnosticSource": "4.7.1"
+        },
+        "compile": {
+          "lib/netcoreapp2.0/Microsoft.Extensions.DiagnosticAdapter.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/Microsoft.Extensions.DiagnosticAdapter.dll": {
+            "related": ".xml"
+          }
         }
       },
       "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
@@ -1825,6 +1874,40 @@
         "lib/netstandard2.0/BouncyCastle.Cryptography.dll",
         "lib/netstandard2.0/BouncyCastle.Cryptography.xml",
         "packageIcon.png"
+      ]
+    },
+    "Bugsnag/4.0.0": {
+      "sha512": "lLOMGzIMZG9K8Lr0y6UN4uHQBxQ9hzpz5rZm/8fMH1Qxcq5VocubCzjm84oneSi3OBDEMToghbZrNcaJNASCgQ==",
+      "type": "package",
+      "path": "bugsnag/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bugsnag.4.0.0.nupkg.sha512",
+        "bugsnag.nuspec",
+        "bugsnag.png",
+        "lib/net462/Bugsnag.dll",
+        "lib/net462/Bugsnag.xml",
+        "lib/net6.0/Bugsnag.dll",
+        "lib/net6.0/Bugsnag.xml",
+        "lib/netstandard2.0/Bugsnag.dll",
+        "lib/netstandard2.0/Bugsnag.xml"
+      ]
+    },
+    "Bugsnag.AspNet.Core/4.0.0": {
+      "sha512": "p8gtJ4395rd+heN/CDHVVxApltCyP411Xmoy1aub8FKd/g3wGm+4aN61kwKuOJoJ2hHe/vuhmAk+gk5RdJXgLw==",
+      "type": "package",
+      "path": "bugsnag.aspnet.core/4.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "bugsnag.aspnet.core.4.0.0.nupkg.sha512",
+        "bugsnag.aspnet.core.nuspec",
+        "bugsnag.png",
+        "lib/net6.0/Bugsnag.AspNet.Core.dll",
+        "lib/net6.0/Bugsnag.AspNet.Core.xml",
+        "lib/netstandard2.0/Bugsnag.AspNet.Core.dll",
+        "lib/netstandard2.0/Bugsnag.AspNet.Core.xml"
       ]
     },
     "EPPlus/7.7.0": {
@@ -3101,6 +3184,24 @@
         "microsoft.extensions.dependencymodel.8.0.0.nupkg.sha512",
         "microsoft.extensions.dependencymodel.nuspec",
         "useSharedDesignerContext.txt"
+      ]
+    },
+    "Microsoft.Extensions.DiagnosticAdapter/3.1.32": {
+      "sha512": "oDv3wt+Q5cmaSfOQ3Cdu6dF6sn/x5gzWdNpOq4ajBwCMWYBr6CchncDvB9pF83ORlbDuX32MsVLOPGPxW4Lx4g==",
+      "type": "package",
+      "path": "microsoft.extensions.diagnosticadapter/3.1.32",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "lib/net461/Microsoft.Extensions.DiagnosticAdapter.dll",
+        "lib/net461/Microsoft.Extensions.DiagnosticAdapter.xml",
+        "lib/netcoreapp2.0/Microsoft.Extensions.DiagnosticAdapter.dll",
+        "lib/netcoreapp2.0/Microsoft.Extensions.DiagnosticAdapter.xml",
+        "lib/netstandard2.0/Microsoft.Extensions.DiagnosticAdapter.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.DiagnosticAdapter.xml",
+        "microsoft.extensions.diagnosticadapter.3.1.32.nupkg.sha512",
+        "microsoft.extensions.diagnosticadapter.nuspec"
       ]
     },
     "Microsoft.Extensions.FileProviders.Abstractions/8.0.0": {
@@ -5173,6 +5274,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "BCrypt.Net-Next >= 4.0.3",
+      "Bugsnag.AspNet.Core >= 4.0.0",
       "EPPlus >= 7.7.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.14",
       "Microsoft.EntityFrameworkCore.Tools >= 8.0.0",
@@ -5235,6 +5337,10 @@
           "BCrypt.Net-Next": {
             "target": "Package",
             "version": "[4.0.3, )"
+          },
+          "Bugsnag.AspNet.Core": {
+            "target": "Package",
+            "version": "[4.0.0, )"
           },
           "EPPlus": {
             "target": "Package",

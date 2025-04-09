@@ -25,8 +25,16 @@ namespace HealthSystem.Controllers
         {
             _context = context;
         }
+
+        [HttpGet("test-error")]
+        public IActionResult TestError()
+        {
+            throw new Exception("error with BugSnag");
+        }
+
         // ------- Admin & statistics -------
 
+        [Authorize(Roles = "Admin")]
         [HttpGet("graph/barChart")]
         public async Task<IActionResult> Barchart()
         {
@@ -42,7 +50,7 @@ namespace HealthSystem.Controllers
             return Ok(BarchartData);
         }
 
-
+        [Authorize(Roles = "Admin")]
         [HttpGet("graph/piechart")]
         public async Task<IActionResult> Piechart()
         {
@@ -61,7 +69,7 @@ namespace HealthSystem.Controllers
 
 
         // ------- Admin & Patient -------
-
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-patient")]
         public async Task<IActionResult> CreatePatient([FromBody] PatientCreateRequest request)
         {
@@ -159,6 +167,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Create new Doctor API  *****
+        [Authorize(Roles = "Admin")]
         [HttpPost("create-doctor")]
         public async Task<IActionResult> CreateDoctor([FromBody] CreateDoctorRequest request)
         {
@@ -223,6 +232,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Get All Doctors API  *****
+        [Authorize(Roles = "Admin")]
         [HttpGet("doctors")]
         public async Task<IActionResult> GetDoctors()
         {
@@ -278,6 +288,7 @@ namespace HealthSystem.Controllers
 
 
         // ****  Create new Appointment API  *****
+        [Authorize(Roles = "Admin")]
         [HttpPost("appointments/create")]
         public async Task<IActionResult> CreateAppointment([FromBody] CreateAppointmentRequest request)
         {
@@ -289,7 +300,8 @@ namespace HealthSystem.Controllers
 
             // Step 1: Check if patient and doctor exist
             var patient = await _context.Patients.FindAsync(request.PatientID);
-            var doctor = await _context.Doctors.Include(d => d.WorkingHours)
+            var doctor = await _context.Doctors.Include(d => d.User)
+                                               .Include(d => d.WorkingHours)       
                                                .FirstOrDefaultAsync(d => d.UserID == request.DoctorID);
 
             if (patient == null || doctor == null)
@@ -299,14 +311,6 @@ namespace HealthSystem.Controllers
 
             // Step 2: Check if the appointment time is within the doctor's working hours
             var appointmentTime = TimeSpan.Parse(request.AppointmentTime);
-            //var appointmentDay = Enum.TryParse(request.AppointmentDate.ToString("dddd").ToUpper(), out dayOfWeek day) ? day : dayOfWeek.Monday;
-
-            //var workingHours = doctor.WorkingHours.FirstOrDefault(w => w.Day == appointmentDay);
-
-            //if (workingHours == null || appointmentTime < workingHours.StartTime || appointmentTime > workingHours.EndTime)
-            //{
-            //    return BadRequest("The doctor is not available at the selected time.");
-            //}
 
             // Step 3: Create the new appointment
             var appointment = new Appointment
@@ -323,8 +327,11 @@ namespace HealthSystem.Controllers
             await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
 
+       
             // Return success message
-            return Ok(new { message = "Appointment created successfully" });
+            return Ok(new { message = "Appointment created successfully" 
+           
+            });
         }
 
 
@@ -332,6 +339,7 @@ namespace HealthSystem.Controllers
 
         // ****  Get download Excel file contain doctor information API  *****
         // GET: /api/admin/download-excel/{doctorId}
+        [Authorize(Roles = "Admin")]
         [HttpGet("download-excel/{doctorId}")]
         public async Task<IActionResult> DownloadDoctorExcel(Guid doctorId)
         {
@@ -383,6 +391,7 @@ namespace HealthSystem.Controllers
         }
 
         // ****  Get Availabel appointments API  *****
+        [Authorize(Roles = "Admin")]
         [HttpGet("getAllAvailablAappointments")]
         public async Task<IActionResult> GetAvailableAppointments(DateTime date, ClinicType clinic)
         {
@@ -425,6 +434,7 @@ namespace HealthSystem.Controllers
                         availableAppointments.Add(new
                         {
                             DoctorName = $"{doctor.User.FirstName} {doctor.User.LastName}",
+                            DoctorID=doctor.User.UserID,
                             Specialization = doctor.Specialization,
                             Clinic = doctor.Clinic,
                             AvailableTimeSlots = availableTimeSlots

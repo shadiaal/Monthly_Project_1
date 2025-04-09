@@ -1,5 +1,6 @@
 ﻿using HealthSystem.Data;
 using HealthSystem.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
@@ -19,8 +20,8 @@ namespace HealthSystem.Controllers
 			_context = context;
 		}
 
-	
-		[HttpGet("{id}")]
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("{id}")]
 		public async Task<ActionResult<Doctor>> GetDoctor(Guid id)
 		{
 			var doctor = await _context.Doctors
@@ -37,18 +38,21 @@ namespace HealthSystem.Controllers
 		}
 
 
-	
 
-		[HttpGet("{id}/appointments")]
+        [Authorize(Roles = "Doctor")]
+        [HttpGet("{id}/appointments")]
 		public async Task<ActionResult<List<Appointment>>> GetAppointmentsByDoctor(Guid id)
 		{
-			var appointments = await _context.Appointments
-				.Where(a => a.DoctorUserID == id)
-				.Include(a => a.Patient)
-				.ThenInclude(p => p.User)
-				.ToListAsync();
+         
+            var appointments = await _context.Appointments
+                            .Where(a => a.DoctorUserID == id)
+                            .Include(a => a.Patient)
+                            .ThenInclude(p => p.User)
+                            .Include(a => a.Doctor)  
+                            .ToListAsync();
 
-			if (appointments == null || appointments.Count == 0)
+
+            if (appointments == null || appointments.Count == 0)
 			{
 				return NotFound(new { message = "No appointments found for this doctor" });
 			}
@@ -58,8 +62,9 @@ namespace HealthSystem.Controllers
 
 
 
-		// PUT: /api/doctor/appointments/{appointmentId}/notes
-		[HttpPut("appointments/{appointmentId}/notes")]
+        // PUT: /api/doctor/appointments/{appointmentId}/notes
+        [Authorize(Roles = "Doctor")]
+        [HttpPut("appointments/{appointmentId}/notes")]
 		public async Task<IActionResult> AddNoteToAppointment(int appointmentId, [FromBody] string note)
 		{
 			if (string.IsNullOrWhiteSpace(note))

@@ -115,6 +115,16 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "HealthSystem.Controllers.AdminController",
+    "Method": "TestError",
+    "RelativePath": "api/admin/test-error",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "HealthSystem.Controllers.AuthController",
     "Method": "SignIn",
     "RelativePath": "api/Auth/signin",
@@ -198,6 +208,38 @@
       {
         "Name": "note",
         "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.PatientController",
+    "Method": "GetAppointments",
+    "RelativePath": "api/patients/getAppointments/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "HealthSystem.Controllers.PatientController",
+    "Method": "GetPatientData",
+    "RelativePath": "api/patients/getPatientData/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
         "IsRequired": true
       }
     ],
