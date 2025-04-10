@@ -11,10 +11,12 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
+  // Doctor user ID (received as input or from local storage)
   @Input() userID!: string;
+  // List of appointments
   appointments: any[] = [];
-
-
+// Status filter for appointments
+  statusFilter: string = '';
 
   // Modal details
   isModalOpen: boolean = false;
@@ -22,7 +24,7 @@ export class AppointmentsComponent implements OnInit {
   selectedAppointmentId!: number;
 
   constructor(private DoctorService: DoctorService) { }
-
+ // On component initialization, fetch appointments for the doctor
   ngOnInit(): void {
     this.userID = localStorage.getItem('userID') || '';
     if (this.userID) {
@@ -40,14 +42,7 @@ export class AppointmentsComponent implements OnInit {
   }
 
 
-
-
-
-
-  statusFilter: string = '';
-
-
-
+// Getter to filter appointments based on status
   get filteredAppointments() {
     if (!this.statusFilter) return this.appointments.map(appointment => this.updateAppointmentStatus(appointment));
 
