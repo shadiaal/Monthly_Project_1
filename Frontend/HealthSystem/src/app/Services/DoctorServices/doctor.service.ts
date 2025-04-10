@@ -13,7 +13,7 @@ export class DoctorService {
 
 
 
-
+ // Get doctor data by user ID (includes authorization header)
 
 getDoctorData(userID: string): Observable<any> {
   const token = localStorage.getItem('token');
@@ -27,7 +27,7 @@ getDoctorData(userID: string): Observable<any> {
 }
 
     
-
+ // Get appointments for a specific doctor (by user ID), with logging
 getAppointments(userID: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -41,36 +41,7 @@ getAppointments(userID: string): Observable<any> {
   );
 }
 
-//  updateNote(appointmentId: number, note: string): Observable<any> {
-//   const token = localStorage.getItem('token');
-//   if (!token) {
-//     throw new Error('Token not found');
-//   }
-//   const headers = new HttpHeaders({
-//     'Authorization': `Bearer ${token}`
-//   });
-//     const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
-//     return this.http.put(url, { note }, { headers });
-
-
-// }
-
-// updateNote(appointmentId: number, note: string): Observable<any> {
-//   const token = localStorage.getItem('token');
-//   if (!token) {
-//     throw new Error('Token not found');
-//   }
-
-//   const headers = new HttpHeaders({
-//     'Authorization': `Bearer ${token}`,
-//     'Content-Type': 'application/json'  // Ensure Content-Type is set to JSON
-//   });
-
-//   const url = `${this.apiUrl}/appointments/${appointmentId}/notes`;
-
-//   // Send the note as a plain string
-//   return this.http.put(url, note, { headers });
-// }
+ // Update note for a specific appointment (by appointment ID), includes authorization
 updateNote(appointmentId: number, note: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -81,10 +52,8 @@ updateNote(appointmentId: number, note: string): Observable<any> {
     'Authorization': `Bearer ${token}`,
     'Content-Type': 'application/json'
   });
-
-  const url = `${this.apiUrl}/appointments/${appointmentId}/notes`;
-
-  return this.http.put(url, JSON.stringify(note), { headers }); 
+    const url = `${this.apiUrl}/appointments/${appointmentId}/notes`; 
+    return this.http.put(url, JSON.stringify( note) , { headers });
 }
 
 

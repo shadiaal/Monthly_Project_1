@@ -5,18 +5,6 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/admin/test-error": {
-      "get": {
-        "tags": [
-          "Admin"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/admin/graph/barChart": {
       "get": {
         "tags": [
@@ -706,9 +694,9 @@
       "SignIn": {
         "type": "object",
         "properties": {
-          "userID": {
+          "email": {
             "type": "string",
-            "format": "uuid"
+            "nullable": true
           },
           "password": {
             "type": "string",

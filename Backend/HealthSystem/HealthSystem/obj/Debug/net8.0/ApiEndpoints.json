@@ -115,16 +115,6 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "HealthSystem.Controllers.AdminController",
-    "Method": "TestError",
-    "RelativePath": "api/admin/test-error",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
     "ContainingType": "HealthSystem.Controllers.AuthController",
     "Method": "SignIn",
     "RelativePath": "api/Auth/signin",

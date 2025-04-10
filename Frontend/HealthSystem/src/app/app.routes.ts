@@ -35,7 +35,7 @@ export const routes: Routes = [
     children: [
       { path: 'information', component: InformationComponent },
       { path: 'appointments', component: AppointmentsComponent },
-      { path: '', redirectTo: 'information', pathMatch: 'full' }
+      { path: '', redirectTo: 'information', pathMatch: 'full' },
     ],
   },
   {

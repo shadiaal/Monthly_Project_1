@@ -19,7 +19,7 @@ namespace HealthSystem.Controllers
 		{
 			_context = context;
 		}
-
+        // Get doctor details by user ID
         [Authorize(Roles = "Doctor")]
         [HttpGet("{id}")]
 		public async Task<ActionResult<Doctor>> GetDoctor(Guid id)
@@ -38,7 +38,7 @@ namespace HealthSystem.Controllers
 		}
 
 
-
+        // Get all appointments for a specific doctor by user ID
         [Authorize(Roles = "Doctor")]
         [HttpGet("{id}/appointments")]
 		public async Task<ActionResult<List<Appointment>>> GetAppointmentsByDoctor(Guid id)
@@ -61,8 +61,8 @@ namespace HealthSystem.Controllers
 		}
 
 
-
-        // PUT: /api/doctor/appointments/{appointmentId}/notes
+        // Add or update note for a specific appointment
+        
         [Authorize(Roles = "Doctor")]
         [HttpPut("appointments/{appointmentId}/notes")]
 		public async Task<IActionResult> AddNoteToAppointment(int appointmentId, [FromBody] string note)

@@ -298,3 +298,5 @@ C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1
 C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1(2)\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Bugsnag.AspNet.Core.dll
 C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1(2)\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Microsoft.Extensions.DiagnosticAdapter.dll
 C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1(2)\Monthly_Project_1\Backend\HealthSystem\HealthSystem\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1(2)\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\soosh\Desktop\Elm-Training Program\MonthlyProject\HealthSystem_Project1(2)\Monthly_Project_1\Backend\HealthSystem\HealthSystem\bin\Debug\net8.0\Twilio.dll

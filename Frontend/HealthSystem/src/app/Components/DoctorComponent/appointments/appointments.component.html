@@ -1,4 +1,3 @@
-
 <div class="container-fluid mt-4">
   <h2 class="mb-3 fw-bold">Appointments</h2>
   
@@ -50,13 +49,23 @@
           </td>
          
            
-          <td>
+          <!-- <td>
             <button class="btn btn-success btn-sm" (click)="openPopup(appointment.appointmentID)">
               Add Note
             </button>
         
 
+          </td> -->
+          <td>
+            <button 
+              class="btn btn-success btn-sm"
+              [disabled]="appointment.statusText !== 'Current'" 
+              [ngClass]="{'disabled-button': appointment.statusText !== 'Current'}"
+              (click)="openPopup(appointment.appointmentID)">
+              Add Note
+            </button>
           </td>
+          
         </tr>
       </tbody>
     </table>
@@ -83,19 +92,5 @@
         <button class="btn btn-primary" (click)="saveNote()">Save</button>
       </div>
     </div>
-  </div>
-</div> 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  </div>
+</div>

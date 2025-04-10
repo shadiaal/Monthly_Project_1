@@ -11,14 +11,16 @@ export class SignInService {
   constructor(private http: HttpClient) { }
 
   // Method to sign in and get the token
-  signIn(userID: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { userID, password });
+  signIn(Email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.apiUrl, { Email, password });
   }
 
-  // Store the token in localStorage (or sessionStorage, depending on your preference)
+  // Store the token in localStorage 
   storeToken(token: string): void {
     localStorage.setItem('jwtToken', token);
   }
+
+ 
 
   // Get the stored token (for use in requests)
   getToken(): string | null {
@@ -35,15 +37,5 @@ export class SignInService {
     localStorage.removeItem('jwtToken');
   }
 
-  // Get the user ID (this would require an endpoint that returns user details based on the token)
-  /*getUserDetails(): Observable<any> {
-    const token = this.getToken();
-    if (token) {
-      // Assuming there's an API endpoint that provides user details using the token
-      return this.http.get<any>('http://localhost:5187/api/Auth/user-details', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
-    }
-    return new Observable(observer => observer.error('No token found'));
-  }*/
+
 }

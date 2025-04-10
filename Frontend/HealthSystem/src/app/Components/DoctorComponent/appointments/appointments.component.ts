@@ -11,21 +11,25 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./appointments.component.css']
 })
 export class AppointmentsComponent implements OnInit {
- 
+   // Doctor user ID (received as input or from local storage)
+  @Input() userID!: string;
+   // List of appointments
+  appointments: any[] = [];
+    
+ // Status filter for appointments
+
+ statusFilter: string = '';
+  
 
   // Modal details
   isModalOpen: boolean = false;
   note: string = '';
   selectedAppointmentId!: number;
 
-  
 
-
-    @Input() userID!: string;
-    appointments: any[] = [];
   
     constructor(private DoctorService: DoctorService) { }
-  
+  // On component initialization, fetch appointments for the doctor
     ngOnInit(): void {
       this.userID = localStorage.getItem('userID') || '';
       if (this.userID) {
@@ -40,104 +44,43 @@ export class AppointmentsComponent implements OnInit {
         );
       }
   
-    }
-  
-  
-    statusFilter: string = '';
-  
-   
+  }
 
-    // get filteredAppointments() {
-    //   if (!this.statusFilter) return this.appointments;
-    
-    //   const statusMap: { [key: string]: number } = {
-    //     'Upcoming': 0,
-    //     'Current': 1,
-    //     'Past': 2
-    //   };
-    
-    //   const selectedStatus = statusMap[this.statusFilter];
-    //   return this.appointments.filter(appointment => appointment.status === selectedStatus);
-    // }
-    
-
-    // getAppointmentStatus(appointmentDateString: string): string {
-    //   const now = new Date();
-    //   const appointmentDate = new Date(appointmentDateString);
-    
-    //   if (appointmentDate.toDateString() === now.toDateString()) {
-    //     return 'Current';
-    //   } else if (appointmentDate > now) {
-    //     return 'Upcoming';
-    //   } else {
-    //     return 'Past';
-    //   }
-    // }
-    
-
-
-
-    // get filteredAppointments() {
-    //   if (!this.statusFilter) return this.appointments;
+  // Getter to filter appointments based on status
+  get filteredAppointments() {
+    if (!this.statusFilter) return this.appointments.map(appointment => this.updateAppointmentStatus(appointment));
   
-    //   const now = new Date();
+    const now = new Date();
   
-    //   return this.appointments.filter(appointment => {
-    //     const appointmentDate = new Date(appointment.appointmentDate);
-  
-    //     if (this.statusFilter === 'Upcoming') {
-    //       return appointmentDate > now;
-    //     } else if (this.statusFilter === 'Current') {
-    //       return appointmentDate.toDateString() === now.toDateString();
-    //     } else if (this.statusFilter === 'Past') {
-    //       return appointmentDate < now && appointmentDate.toDateString() !== now.toDateString();
-    //     }
-  
-    //     return true;
-    //   });
-    // }
-  
-    
-
-    get filteredAppointments() {
-      if (!this.statusFilter) return this.appointments.map(appointment => this.updateAppointmentStatus(appointment));
-    
-      const now = new Date();
-    
-      return this.appointments.filter(appointment => {
-        const appointmentDate = new Date(appointment.appointmentDate);
-    
-        if (this.statusFilter === 'Upcoming') {
-          return appointmentDate > now;
-        } else if (this.statusFilter === 'Current') {
-          return appointmentDate.toDateString() === now.toDateString();
-        } else if (this.statusFilter === 'Past') {
-          return appointmentDate < now && appointmentDate.toDateString() !== now.toDateString();
-        }
-    
-        return true;
-      }).map(appointment => this.updateAppointmentStatus(appointment));
-    }
-    
-    private updateAppointmentStatus(appointment: any) {
-      const now = new Date();
+    return this.appointments.filter(appointment => {
       const appointmentDate = new Date(appointment.appointmentDate);
-    
-      if (appointmentDate > now) {
-        appointment.statusText = 'Upcoming';
-      } else if (appointmentDate.toDateString() === now.toDateString()) {
-        appointment.statusText = 'Current';
-      } else {
-        appointment.statusText = 'Past';
+  
+      if (this.statusFilter === 'Upcoming') {
+        return appointmentDate > now;
+      } else if (this.statusFilter === 'Current') {
+        return appointmentDate.toDateString() === now.toDateString();
+      } else if (this.statusFilter === 'Past') {
+        return appointmentDate < now && appointmentDate.toDateString() !== now.toDateString();
       }
-    
-      return appointment;
+  
+      return true;
+    }).map(appointment => this.updateAppointmentStatus(appointment));
+  }
+  
+  private updateAppointmentStatus(appointment: any) {
+    const now = new Date();
+    const appointmentDate = new Date(appointment.appointmentDate);
+  
+    if (appointmentDate > now) {
+      appointment.statusText = 'Upcoming';
+    } else if (appointmentDate.toDateString() === now.toDateString()) {
+      appointment.statusText = 'Current';
+    } else {
+      appointment.statusText = 'Past';
     }
-    
-    
-
-
-
+  
+    return appointment;
+    }
 
 
   //Open the module to add a note.
@@ -152,7 +95,7 @@ export class AppointmentsComponent implements OnInit {
     this.note = '';
   }
 
-  //Save note
+  // Save note
   saveNote() {
     if (!this.note.trim()) {
       alert('Please write a note.');
@@ -172,8 +115,8 @@ export class AppointmentsComponent implements OnInit {
   }
 
 
-
-
+  
+  
 
 
 
