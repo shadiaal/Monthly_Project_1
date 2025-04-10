@@ -7,6 +7,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Bugsnag.AspNet.Core;
 using Microsoft.Extensions.Logging;
+using HealthSystem.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -19,6 +20,11 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 	options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
 // Configure BugSnag
 builder.Services.AddBugsnag(configuration =>
@@ -47,7 +53,9 @@ builder.Services.AddCors(options =>
 	});
 });
 
-
+//Twilio - Register the Service
+builder.Services.Configure<TwilioSettings>(builder.Configuration.GetSection("Twilio"));
+builder.Services.AddTransient<ITwilioService, TwilioService>();
 
 builder.Services.AddSwaggerGen();
 
