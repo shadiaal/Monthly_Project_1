@@ -14,7 +14,7 @@ export class DoctorService {
 
 
 
-
+// Get doctor data by user ID (includes authorization header)
 getDoctorData(userID: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -27,7 +27,7 @@ getDoctorData(userID: string): Observable<any> {
 }
 
     
-
+// Get appointments for a specific doctor (by user ID), with logging
 getAppointments(userID: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
@@ -40,7 +40,7 @@ getAppointments(userID: string): Observable<any> {
     tap((data) => console.log('Appointments:', data))
   );
 }
-
+// Update note for a specific appointment (by appointment ID), includes authorization
  updateNote(appointmentId: number, note: string): Observable<any> {
   const token = localStorage.getItem('token');
   if (!token) {
