@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthSystem.Services;
 
 namespace HealthSystem.Controllers
 {
@@ -20,10 +21,12 @@ namespace HealthSystem.Controllers
     public class AdminController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly ITwilioService _twilioService;
 
-        public AdminController(AppDbContext context)
+        public AdminController(AppDbContext context, ITwilioService twilioService)
         {
             _context = context;
+            _twilioService = twilioService;
         }
 
 
@@ -284,13 +287,18 @@ namespace HealthSystem.Controllers
             // Validate input
             if (request == null || !ModelState.IsValid)
             {
+                // Add these debug lines
                 return BadRequest("Invalid appointment data.");
             }
 
+
+
             // Step 1: Check if patient and doctor exist
-            var patient = await _context.Patients.FindAsync(request.PatientID);
+            var patient = await _context.Patients
+                .Include(p => p.User)
+                .FirstOrDefaultAsync(p => p.UserID == request.PatientID);
             var doctor = await _context.Doctors.Include(d => d.User)
-                                               .Include(d => d.WorkingHours)       
+                                               .Include(d => d.WorkingHours)
                                                .FirstOrDefaultAsync(d => d.UserID == request.DoctorID);
 
             if (patient == null || doctor == null)
@@ -316,10 +324,33 @@ namespace HealthSystem.Controllers
             await _context.Appointments.AddAsync(appointment);
             await _context.SaveChangesAsync();
 
-       
+            //Twilio Send SMS
+            var fullDateTime = appointment.AppointmentDate.Date + appointment.AppointmentTime; // Combine date and time
+            var formattedTime = fullDateTime.ToString("hh:mm tt"); // ✅ Works with AM/PM
+            var formattedDate = appointment.AppointmentDate.ToString("yyyy-MM-dd"); // formatting
+
+            var message = $"Dear {patient.User.FirstName} {patient.User.LastName}, Your appointment is confirmed for {formattedTime} on {formattedDate}.";
+            // Format patient's phone number
+            var patientPhone = patient.User.PhoneNumber;
+            if (patientPhone.StartsWith("8"))
+            {
+                patientPhone = "+1" + patientPhone.Substring(0); // Convert to international format
+            }
+            try
+            {
+                // Send SMS using Twilio
+                await _twilioService.SendSmsAsync(patientPhone, message);
+            }
+            catch (Exception ex)
+            {
+                // Log error or handle it based on your application's error-handling strategy
+                return StatusCode(500, "Error sending SMS: " + ex.Message);
+            }
             // Return success message
-            return Ok(new { message = "Appointment created successfully" 
-           
+            return Ok(new
+            {
+                message = "Appointment created successfully"
+
             });
         }
 

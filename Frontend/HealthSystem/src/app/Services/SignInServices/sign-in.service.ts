@@ -20,14 +20,12 @@ export class SignInService {
     localStorage.setItem('jwtToken', token);
   }
 
- 
-
   // Get the stored token (for use in requests)
   getToken(): string | null {
     return localStorage.getItem('jwtToken');
   }
 
-  // Check if the user is authenticated (i.e., token exists)
+  // Check if the user is authenticated 
   isAuthenticated(): boolean {
     return !!this.getToken();
   }
@@ -36,6 +34,5 @@ export class SignInService {
   logout(): void {
     localStorage.removeItem('jwtToken');
   }
-
 
 }
