@@ -13,55 +13,49 @@ import { FormsModule } from '@angular/forms';
 export class AppointmentsComponent implements OnInit {
   @Input() userID!: string;
   appointments: any[] = [];
-  
-  
+
+
 
   // Modal details
   isModalOpen: boolean = false;
   note: string = '';
   selectedAppointmentId!: number;
 
-  constructor(private DoctorService: DoctorService) {}
+  constructor(private DoctorService: DoctorService) { }
 
   ngOnInit(): void {
     this.userID = localStorage.getItem('userID') || '';
     if (this.userID) {
-    this.DoctorService.getAppointments(this.userID).subscribe(
-      (data) => {  
-        this.appointments = data?.$values || [];  
-        console.log('appointments Data:', this.appointments); 
-      },
-      (error) => {
-        console.error('Error fetching appointments:', error);
-      }
-    );
+      this.DoctorService.getAppointments(this.userID).subscribe(
+        (data) => {
+          this.appointments = data?.$values || [];
+          console.log('appointments Data:', this.appointments);
+        },
+        (error) => {
+          console.error('Error fetching appointments:', error);
+        }
+      );
+    }
+
   }
-  
-  }
-
- 
-  // get filteredAppointments() {
-  //   return this.appointments.filter(appointment =>
-  //     (!this.statusFilter || appointment.status === this.statusFilter)
-  //   );
-  // }
 
 
-  
+
+
 
 
   statusFilter: string = '';
-  
-   
+
+
 
   get filteredAppointments() {
     if (!this.statusFilter) return this.appointments.map(appointment => this.updateAppointmentStatus(appointment));
-  
+
     const now = new Date();
-  
+
     return this.appointments.filter(appointment => {
       const appointmentDate = new Date(appointment.appointmentDate);
-  
+
       if (this.statusFilter === 'Upcoming') {
         return appointmentDate > now;
       } else if (this.statusFilter === 'Current') {
@@ -69,25 +63,27 @@ export class AppointmentsComponent implements OnInit {
       } else if (this.statusFilter === 'Past') {
         return appointmentDate < now && appointmentDate.toDateString() !== now.toDateString();
       }
-  
+
       return true;
     }).map(appointment => this.updateAppointmentStatus(appointment));
   }
-  
+
   private updateAppointmentStatus(appointment: any) {
     const now = new Date();
     const appointmentDate = new Date(appointment.appointmentDate);
-  
+    console.log("app", appointment)
+
     if (appointmentDate > now) {
       appointment.statusText = 'Upcoming';
+
     } else if (appointmentDate.toDateString() === now.toDateString()) {
       appointment.statusText = 'Current';
     } else {
       appointment.statusText = 'Past';
     }
-  
+
     return appointment;
-    }
+  }
 
 
 
@@ -157,7 +153,7 @@ export class AppointmentsComponent implements OnInit {
 
 
 
- 
+
 
 
 

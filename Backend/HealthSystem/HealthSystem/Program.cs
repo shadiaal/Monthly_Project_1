@@ -19,6 +19,7 @@ builder.Services.AddControllers().AddJsonOptions(options =>
 	options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve;
 });
 
+
 // Configure BugSnag
 builder.Services.AddBugsnag(configuration =>
 {

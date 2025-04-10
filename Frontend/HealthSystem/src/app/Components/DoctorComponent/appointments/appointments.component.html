@@ -50,12 +50,14 @@
          
            
           <td>
-            <button class="btn btn-success btn-sm" (click)="openPopup(appointment.appointmentID)">
+            <button 
+              class="btn btn-success btn-sm"
+              [disabled]="appointment.statusText !== 'Current'" 
+              [ngClass]="{'disabled-button': appointment.statusText !== 'Current'}"
+              (click)="openPopup(appointment.appointmentID)">
               Add Note
             </button>
-        
-
-          </td>
+          </td>
         </tr>
       </tbody>
     </table>
